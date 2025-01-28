@@ -1,1 +1,1 @@
-console.log("Hello, friend!");
+import "./1-basic-types";
