@@ -1,0 +1,50 @@
+:root {
+  --color-white: #f7f7f7;
+  --color-black: #252525;
+
+  --color-primary: #6c63ff;
+
+  --color-surface: var(--color-white);
+  --color-text: var(--color-black);
+
+  &.dark {
+    --color-surface: #252525;
+    --color-text: #f7f7f7;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: "Kanit", system-ui;
+}
+
+input,
+label,
+select,
+textarea,
+button,
+fieldset,
+legend,
+datalist,
+output,
+option,
+optgroup {
+  font: inherit;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+
+  inline-size: min(30rem, 100% - 2rem);
+
+  margin-inline-start: auto;
+}
