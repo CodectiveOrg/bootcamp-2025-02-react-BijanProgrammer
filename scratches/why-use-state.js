@@ -1,3 +1,8 @@
+/*
+  1. Tell react variable is changed and you should call the function again
+  2. Component should remember variable's previous value (Closure)
+*/
+
 function generateCounter() {
   let count = 0;
 
