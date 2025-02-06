@@ -2,10 +2,26 @@ import { ReactNode, useState } from "react";
 
 import "./App.css";
 
+type Theme = "light" | "dark";
+
+function readThemeFromLocalStorage(): Theme {
+  console.log("readThemeFromLocalStorage");
+
+  const item = localStorage.getItem("theme");
+
+  if (!item) {
+    return "light";
+  }
+
+  return item as Theme;
+}
+
 function App(): ReactNode {
   console.log("rendering app");
 
-  const [parentCount, setParentCount] = useState(0);
+  const [theme, setTheme] = useState<Theme>(readThemeFromLocalStorage);
+
+  const [parentCount, setParentCount] = useState<number>(0);
 
   return (
     <div>
