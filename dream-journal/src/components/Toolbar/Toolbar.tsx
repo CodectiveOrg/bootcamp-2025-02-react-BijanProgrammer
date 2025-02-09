@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 
+import Button from "../Button/Button.tsx";
 import Select from "../Select/Select.tsx";
 import TextInput from "../TextInput/TextInput.tsx";
 
@@ -19,7 +20,9 @@ function Toolbar(): ReactNode {
           { value: "bad", label: "Bad" },
         ]}
       ></Select>
-      <button>.</button>
+      <Button variant="solid" size="medium" shape="square">
+        <MingcuteSearchLine />
+      </Button>
     </div>
   );
 }
