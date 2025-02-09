@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 
+import Select from "../Select/Select.tsx";
 import TextInput from "../TextInput/TextInput.tsx";
 
 import MingcuteSearchLine from "../../icons/MingcuteSearchLine.tsx";
@@ -11,11 +12,13 @@ function Toolbar(): ReactNode {
         suffixIcon={<MingcuteSearchLine />}
         placeholder="Search note..."
       />
-      <select>
-        <option value="all">All</option>
-        <option value="good">Good</option>
-        <option value="bad">Bad</option>
-      </select>
+      <Select
+        options={[
+          { value: "all", label: "All" },
+          { value: "good", label: "Good" },
+          { value: "bad", label: "Bad" },
+        ]}
+      ></Select>
       <button>.</button>
     </div>
   );
