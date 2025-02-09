@@ -8,8 +8,8 @@ function Toolbar(): ReactNode {
   return (
     <div className="toolbar">
       <TextInput
-        placeholder="Search note..."
         suffixIcon={<MingcuteSearchLine />}
+        placeholder="Search note..."
       />
       <select>
         <option value="all">All</option>
