@@ -1,14 +1,14 @@
-import { ReactElement, useEffect, useRef } from "react";
+import { ReactElement, useRef } from "react";
 
 import Button from "../Button/Button.tsx";
-import TextInput from "../TextInput/TextInput.tsx";
+import DateInput from "../DateInput/DateInput.tsx";
+import Select from "../Select/Select.tsx";
 import TextArea from "../TextArea/TextArea.tsx";
+import TextInput from "../TextInput/TextInput.tsx";
 
 import MingcuteAddLine from "../../icons/MingcuteAddLine.tsx";
 
 import styles from "./Create.module.css";
-import DateInput from "../DateInput/DateInput.tsx";
-import Select from "../Select/Select.tsx";
 
 export default function Create(): ReactElement {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -20,10 +20,6 @@ export default function Create(): ReactElement {
   const cancelButtonClickHandler = (): void => {
     dialogRef.current?.close();
   };
-
-  useEffect(() => {
-    dialogRef.current?.showModal();
-  }, []);
 
   return (
     <div className={styles.create}>
