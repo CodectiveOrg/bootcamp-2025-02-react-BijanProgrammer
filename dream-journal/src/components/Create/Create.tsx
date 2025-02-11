@@ -8,6 +8,7 @@ import MingcuteAddLine from "../../icons/MingcuteAddLine.tsx";
 
 import styles from "./Create.module.css";
 import DateInput from "../DateInput/DateInput.tsx";
+import Select from "../Select/Select.tsx";
 
 export default function Create(): ReactElement {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -35,6 +36,13 @@ export default function Create(): ReactElement {
           <TextInput placeholder="Input your title..." />
           <TextArea placeholder="Input your description..." />
           <DateInput />
+          <Select
+            variant="outlined"
+            options={[
+              { value: "good", label: "😃 Good" },
+              { value: "bad", label: "😭 Bad" },
+            ]}
+          />
           <div className={styles.actions}>
             <Button
               type="button"

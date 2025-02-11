@@ -6,9 +6,6 @@
   select {
     appearance: none;
 
-    background-color: var(--color-primary);
-    color: var(--color-white);
-
     block-size: 100%;
     inline-size: 100%;
 
@@ -36,8 +33,6 @@
   &::after {
     content: "▼";
 
-    color: var(--color-white);
-
     position: absolute;
     inset-block-start: 50%;
     inset-inline-end: 0.5rem;
@@ -51,5 +46,29 @@
 
   &:focus-within {
     outline: 2px solid var(--color-primary-outline);
+  }
+
+  &.solid {
+    select {
+      background-color: var(--color-primary);
+      color: var(--color-white);
+    }
+
+    &::after {
+      color: var(--color-white);
+    }
+  }
+
+  &.outlined {
+    select {
+      background-color: transparent;
+      color: var(--color-primary);
+
+      border: 1px solid var(--color-primary);
+    }
+
+    &::after {
+      color: var(--color-primary);
+    }
   }
 }
