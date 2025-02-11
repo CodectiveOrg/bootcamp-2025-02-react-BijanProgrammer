@@ -1,9 +1,13 @@
 import { ReactNode } from "react";
-import clsx from "clsx";
+
+import Button from "../Button/Button.tsx";
+
+import MingcuteEdit2Line from "../../icons/MingcuteEdit2Line.tsx";
+import MingcuteDelete2Line from "../../icons/MingcuteDelete2Line.tsx";
 
 import { Dream } from "../../types/dream.ts";
 
-import style from "./Result.module.css";
+import styles from "./Result.module.css";
 
 const dreams: Dream[] = [
   {
@@ -34,16 +38,19 @@ const dreams: Dream[] = [
 ];
 
 function Result(): ReactNode {
-  const isActive = true;
-
   return (
-    <ul className="chiz">
+    <ul className={styles.result}>
       {dreams.map((dream) => (
-        <li
-          key={dream.id}
-          className={clsx(style.title, "chiz", isActive && style.title)}
-        >
-          {dream.title}
+        <li key={dream.id}>
+          <div className={styles.title}>{dream.title}</div>
+          <div className={styles.actions}>
+            <Button variant="ghost" size="small" shape="square">
+              <MingcuteEdit2Line />
+            </Button>
+            <Button color="danger" variant="ghost" size="small" shape="square">
+              <MingcuteDelete2Line />
+            </Button>
+          </div>
         </li>
       ))}
     </ul>
