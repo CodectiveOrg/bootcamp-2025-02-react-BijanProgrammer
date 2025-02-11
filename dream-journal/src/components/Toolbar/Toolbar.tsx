@@ -4,12 +4,16 @@ import Button from "../Button/Button.tsx";
 import Select from "../Select/Select.tsx";
 import TextInput from "../TextInput/TextInput.tsx";
 
+import MingcuteMoonLine from "../../icons/MingcuteMoonLine.tsx";
 import MingcuteSearchLine from "../../icons/MingcuteSearchLine.tsx";
+
+import styles from "./Toolbar.module.css";
 
 function Toolbar(): ReactNode {
   return (
-    <div className="toolbar">
+    <div className={styles.toolbar}>
       <TextInput
+        className={styles.input}
         suffixIcon={<MingcuteSearchLine />}
         placeholder="Search note..."
       />
@@ -21,7 +25,7 @@ function Toolbar(): ReactNode {
         ]}
       ></Select>
       <Button variant="solid" size="medium" shape="square">
-        <MingcuteSearchLine />
+        <MingcuteMoonLine />
       </Button>
     </div>
   );

@@ -29,6 +29,8 @@
   .suffix {
     color: var(--color-primary);
 
+    display: grid;
+
     font-size: 1.25rem;
   }
 
