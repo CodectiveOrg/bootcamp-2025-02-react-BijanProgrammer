@@ -1,0 +1,21 @@
+.text-area {
+  resize: vertical;
+
+  background-color: transparent;
+  color: var(--color-primary);
+
+  min-block-size: 2em;
+  max-block-size: 10em;
+
+  padding: 0.5rem;
+
+  border: 1px solid var(--color-primary);
+  border-radius: 0.25rem;
+
+  font-size: 1rem;
+  line-height: 1.5;
+
+  &:focus {
+    outline: 2px solid var(--color-primary-outline);
+  }
+}
