@@ -2,6 +2,7 @@ import { ReactElement, useEffect, useRef } from "react";
 
 import Button from "../Button/Button.tsx";
 import TextInput from "../TextInput/TextInput.tsx";
+import TextArea from "../TextArea/TextArea.tsx";
 
 import MingcuteAddLine from "../../icons/MingcuteAddLine.tsx";
 
@@ -31,6 +32,7 @@ export default function Create(): ReactElement {
         <div className={styles.content}>
           <div className={styles.title}>Create a New Dream</div>
           <TextInput placeholder="Input your title..." />
+          <TextArea placeholder="Input your description..." />
           <div className={styles.actions}>
             <Button
               type="button"
