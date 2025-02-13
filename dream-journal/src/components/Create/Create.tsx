@@ -1,4 +1,10 @@
-import { ReactElement, useRef } from "react";
+import {
+  ReactElement,
+  useRef,
+  FormEvent,
+  Dispatch,
+  SetStateAction,
+} from "react";
 
 import Button from "../Button/Button.tsx";
 import DateInput from "../DateInput/DateInput.tsx";
@@ -8,9 +14,16 @@ import TextInput from "../TextInput/TextInput.tsx";
 
 import MingcuteAddLine from "../../icons/MingcuteAddLine.tsx";
 
+import { Dream } from "../../types/dream.ts";
+import { Vibe } from "../../types/vibe.ts";
+
 import styles from "./Create.module.css";
 
-export default function Create(): ReactElement {
+type Props = {
+  setDreams: Dispatch<SetStateAction<Dream[]>>;
+};
+
+export default function Create({ setDreams }: Props): ReactElement {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   const addButtonClickHandler = (): void => {
@@ -21,18 +34,40 @@ export default function Create(): ReactElement {
     dialogRef.current?.close();
   };
 
+  const formSubmitHandler = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const dream: Dream = {
+      id: "23",
+      title: formData.get("title") as string,
+      description: formData.get("description") as string,
+      date: new Date(formData.get("date") as string),
+      vibe: formData.get("vibe") as Vibe,
+    };
+
+    setDreams((old) => [...old, dream]);
+
+    dialogRef.current?.close();
+  };
+
   return (
     <div className={styles.create}>
       <Button size="large" shape="circle" onClick={addButtonClickHandler}>
         <MingcuteAddLine />
       </Button>
       <dialog ref={dialogRef}>
-        <div className={styles.content}>
+        <form className={styles.content} onSubmit={formSubmitHandler}>
           <div className={styles.title}>Create a New Dream</div>
-          <TextInput placeholder="Input your title..." />
-          <TextArea placeholder="Input your description..." />
-          <DateInput />
+          <TextInput name="title" placeholder="Input your title..." />
+          <TextArea
+            name="description"
+            placeholder="Input your description..."
+          />
+          <DateInput name="date" />
           <Select
+            name="vibe"
             variant="outlined"
             options={[
               { value: "good", label: "😃 Good" },
@@ -49,7 +84,7 @@ export default function Create(): ReactElement {
             </Button>
             <Button>Apply</Button>
           </div>
-        </div>
+        </form>
       </dialog>
     </div>
   );

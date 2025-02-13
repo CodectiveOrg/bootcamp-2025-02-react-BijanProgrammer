@@ -1,4 +1,4 @@
-import { ComponentProps, ReactElement } from "react";
+import { ComponentProps, ReactElement, forwardRef, ForwardedRef } from "react";
 
 import clsx from "clsx";
 
@@ -8,15 +8,16 @@ type Props = ComponentProps<"input"> & {
   suffixIcon?: ReactElement;
 };
 
-export default function TextInput({
-  suffixIcon,
-  className,
-  ...otherProps
-}: Props): ReactElement {
+function TextInput(
+  { suffixIcon, className, ...otherProps }: Props,
+  ref: ForwardedRef<HTMLInputElement>,
+): ReactElement {
   return (
     <div className={clsx(styles["text-input"], className)}>
-      <input type="text" {...otherProps} />
+      <input ref={ref} type="text" {...otherProps} />
       {suffixIcon && <div className={styles.suffix}>{suffixIcon}</div>}
     </div>
   );
 }
+
+export default forwardRef(TextInput);
