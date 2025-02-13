@@ -1,21 +1,11 @@
-import {
-  ReactElement,
-  useRef,
-  FormEvent,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { Dispatch, ReactElement, SetStateAction, useRef } from "react";
 
 import Button from "../Button/Button.tsx";
-import DateInput from "../DateInput/DateInput.tsx";
-import Select from "../Select/Select.tsx";
-import TextArea from "../TextArea/TextArea.tsx";
-import TextInput from "../TextInput/TextInput.tsx";
+import CreateForm from "../CreateForm/CreateForm.tsx";
 
 import MingcuteAddLine from "../../icons/MingcuteAddLine.tsx";
 
 import { Dream } from "../../types/dream.ts";
-import { Vibe } from "../../types/vibe.ts";
 
 import styles from "./Create.module.css";
 
@@ -30,25 +20,7 @@ export default function Create({ setDreams }: Props): ReactElement {
     dialogRef.current?.showModal();
   };
 
-  const cancelButtonClickHandler = (): void => {
-    dialogRef.current?.close();
-  };
-
-  const formSubmitHandler = (e: FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-
-    const dream: Dream = {
-      id: "23",
-      title: formData.get("title") as string,
-      description: formData.get("description") as string,
-      date: new Date(formData.get("date") as string),
-      vibe: formData.get("vibe") as Vibe,
-    };
-
-    setDreams((old) => [...old, dream]);
-
+  const closeModal = (): void => {
     dialogRef.current?.close();
   };
 
@@ -58,33 +30,11 @@ export default function Create({ setDreams }: Props): ReactElement {
         <MingcuteAddLine />
       </Button>
       <dialog ref={dialogRef}>
-        <form className={styles.content} onSubmit={formSubmitHandler}>
-          <div className={styles.title}>Create a New Dream</div>
-          <TextInput name="title" placeholder="Input your title..." />
-          <TextArea
-            name="description"
-            placeholder="Input your description..."
-          />
-          <DateInput name="date" />
-          <Select
-            name="vibe"
-            variant="outlined"
-            options={[
-              { value: "good", label: "😃 Good" },
-              { value: "bad", label: "😭 Bad" },
-            ]}
-          />
-          <div className={styles.actions}>
-            <Button
-              type="button"
-              variant="outlined"
-              onClick={cancelButtonClickHandler}
-            >
-              Cancel
-            </Button>
-            <Button>Apply</Button>
-          </div>
-        </form>
+        <CreateForm
+          setDreams={setDreams}
+          onCancel={closeModal}
+          onSubmit={closeModal}
+        />
       </dialog>
     </div>
   );
