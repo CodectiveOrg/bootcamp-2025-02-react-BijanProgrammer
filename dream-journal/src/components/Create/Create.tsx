@@ -1,9 +1,10 @@
 import { ReactElement, useRef } from "react";
 
 import Button from "../Button/Button.tsx";
-import CreateForm from "../CreateForm/CreateForm.tsx";
 
 import MingcuteAddLine from "../../icons/MingcuteAddLine.tsx";
+
+import CreateForm from "./components/CreateForm/CreateForm.tsx";
 
 import styles from "./Create.module.css";
 

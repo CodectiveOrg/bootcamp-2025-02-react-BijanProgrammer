@@ -2,7 +2,7 @@ import { ReactNode, useContext } from "react";
 
 import Button from "../Button/Button.tsx";
 
-import { DreamsContext } from "../../App.tsx";
+import { DreamsContext } from "../../context/dreams-context.ts";
 
 import MingcuteEdit2Line from "../../icons/MingcuteEdit2Line.tsx";
 import MingcuteDelete2Line from "../../icons/MingcuteDelete2Line.tsx";

@@ -1,15 +1,15 @@
 import { FormEvent, ReactElement, useContext } from "react";
 
-import TextInput from "../TextInput/TextInput.tsx";
-import TextArea from "../TextArea/TextArea.tsx";
-import DateInput from "../DateInput/DateInput.tsx";
-import Select from "../Select/Select.tsx";
-import Button from "../Button/Button.tsx";
+import TextInput from "../../../TextInput/TextInput.tsx";
+import TextArea from "../../../TextArea/TextArea.tsx";
+import DateInput from "../../../DateInput/DateInput.tsx";
+import Select from "../../../Select/Select.tsx";
+import Button from "../../../Button/Button.tsx";
 
-import { DreamsContext } from "../../App.tsx";
+import { DreamsContext } from "../../../../context/dreams-context.ts";
 
-import { Dream } from "../../types/dream.ts";
-import { Vibe } from "../../types/vibe.ts";
+import { Dream } from "../../../../types/dream.ts";
+import { Vibe } from "../../../../types/vibe.ts";
 
 import styles from "./CreateForm.module.css";
 
