@@ -1,19 +1,17 @@
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
 
 import Button from "../Button/Button.tsx";
+
+import { DreamsContext } from "../../App.tsx";
 
 import MingcuteEdit2Line from "../../icons/MingcuteEdit2Line.tsx";
 import MingcuteDelete2Line from "../../icons/MingcuteDelete2Line.tsx";
 
-import { Dream } from "../../types/dream.ts";
-
 import styles from "./Result.module.css";
 
-type Props = {
-  dreams: Dream[];
-};
+function Result(): ReactNode {
+  const { dreams } = useContext(DreamsContext);
 
-function Result({ dreams }: Props): ReactNode {
   return (
     <ul className={styles.result}>
       {dreams.map((dream) => (

@@ -1,4 +1,4 @@
-import { Dispatch, FormEvent, ReactElement, SetStateAction } from "react";
+import { FormEvent, ReactElement, useContext } from "react";
 
 import TextInput from "../TextInput/TextInput.tsx";
 import TextArea from "../TextArea/TextArea.tsx";
@@ -6,22 +6,24 @@ import DateInput from "../DateInput/DateInput.tsx";
 import Select from "../Select/Select.tsx";
 import Button from "../Button/Button.tsx";
 
+import { DreamsContext } from "../../App.tsx";
+
 import { Dream } from "../../types/dream.ts";
 import { Vibe } from "../../types/vibe.ts";
 
 import styles from "./CreateForm.module.css";
 
 type Props = {
-  setDreams: Dispatch<SetStateAction<Dream[]>>;
   onCancel: VoidFunction;
   onSubmit: VoidFunction;
 };
 
 export default function CreateForm({
-  setDreams,
   onCancel,
   onSubmit,
 }: Props): ReactElement {
+  const { setDreams } = useContext(DreamsContext);
+
   const cancelButtonClickHandler = (): void => {
     onCancel();
   };
