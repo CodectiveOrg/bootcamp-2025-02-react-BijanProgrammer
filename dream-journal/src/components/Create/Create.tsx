@@ -1,24 +1,33 @@
-import { ReactElement, useRef } from "react";
+import { ReactElement, useContext, useEffect, useRef } from "react";
 
 import Button from "../Button/Button.tsx";
-import DateInput from "../DateInput/DateInput.tsx";
-import Select from "../Select/Select.tsx";
-import TextArea from "../TextArea/TextArea.tsx";
-import TextInput from "../TextInput/TextInput.tsx";
+
+import { DreamsContext } from "../../context/dreams-context.ts";
 
 import MingcuteAddLine from "../../icons/MingcuteAddLine.tsx";
+
+import CreateForm from "./components/CreateForm/CreateForm.tsx";
 
 import styles from "./Create.module.css";
 
 export default function Create(): ReactElement {
+  const { editingDream, setEditingDream } = useContext(DreamsContext);
+
   const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    if (editingDream) {
+      dialogRef.current?.showModal();
+    }
+  }, [editingDream]);
 
   const addButtonClickHandler = (): void => {
     dialogRef.current?.showModal();
   };
 
-  const cancelButtonClickHandler = (): void => {
+  const closeModal = (): void => {
     dialogRef.current?.close();
+    setEditingDream(null);
   };
 
   return (
@@ -27,29 +36,12 @@ export default function Create(): ReactElement {
         <MingcuteAddLine />
       </Button>
       <dialog ref={dialogRef}>
-        <div className={styles.content}>
-          <div className={styles.title}>Create a New Dream</div>
-          <TextInput placeholder="Input your title..." />
-          <TextArea placeholder="Input your description..." />
-          <DateInput />
-          <Select
-            variant="outlined"
-            options={[
-              { value: "good", label: "😃 Good" },
-              { value: "bad", label: "😭 Bad" },
-            ]}
-          />
-          <div className={styles.actions}>
-            <Button
-              type="button"
-              variant="outlined"
-              onClick={cancelButtonClickHandler}
-            >
-              Cancel
-            </Button>
-            <Button>Apply</Button>
-          </div>
-        </div>
+        {editingDream && (
+          <CreateForm onCancel={closeModal} onSubmit={closeModal} />
+        )}
+        {!editingDream && (
+          <CreateForm onCancel={closeModal} onSubmit={closeModal} />
+        )}
       </dialog>
     </div>
   );
