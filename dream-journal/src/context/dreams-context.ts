@@ -1,12 +1,15 @@
+import { createContext } from "react";
+
 import { Dream } from "../types/dream.ts";
-import { createContext, Dispatch, SetStateAction } from "react";
 
 type DreamsContextValue = {
   dreams: Dream[];
-  setDreams: Dispatch<SetStateAction<Dream[]>>;
+  createDream: (dream: Dream) => void;
+  removeDream: (id: string) => void;
 };
 
 export const DreamsContext = createContext<DreamsContextValue>({
   dreams: [],
-  setDreams: () => {},
+  createDream: () => {},
+  removeDream: () => {},
 });

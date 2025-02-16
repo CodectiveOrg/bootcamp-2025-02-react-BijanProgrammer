@@ -10,7 +10,7 @@ import MingcuteDelete2Line from "../../icons/MingcuteDelete2Line.tsx";
 import styles from "./Result.module.css";
 
 function Result(): ReactNode {
-  const { dreams } = useContext(DreamsContext);
+  const { dreams, removeDream } = useContext(DreamsContext);
 
   return (
     <ul className={styles.result}>
@@ -21,7 +21,13 @@ function Result(): ReactNode {
             <Button variant="ghost" size="small" shape="square">
               <MingcuteEdit2Line />
             </Button>
-            <Button color="danger" variant="ghost" size="small" shape="square">
+            <Button
+              color="danger"
+              variant="ghost"
+              size="small"
+              shape="square"
+              onClick={() => removeDream(dream.id)}
+            >
               <MingcuteDelete2Line />
             </Button>
           </div>
