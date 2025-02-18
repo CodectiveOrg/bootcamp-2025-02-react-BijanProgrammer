@@ -6,8 +6,6 @@ import { DreamsContext } from "../context/dreams-context.ts";
 
 import { Dream } from "../types/dream.ts";
 
-type LocalStorageDream = Omit<Dream, "date"> & { date: string };
-
 type Props = PropsWithChildren;
 
 export default function DreamsProvider({ children }: Props): ReactNode {
@@ -50,10 +48,5 @@ function loadDreamsInitialState(): Dream[] {
     return [];
   }
 
-  const parsedDreams = JSON.parse(item) as LocalStorageDream[];
-
-  return parsedDreams.map((dream) => ({
-    ...dream,
-    date: new Date(dream.date),
-  }));
+  return JSON.parse(item);
 }

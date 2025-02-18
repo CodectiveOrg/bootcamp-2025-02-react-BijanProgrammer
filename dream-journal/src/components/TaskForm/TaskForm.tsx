@@ -1,4 +1,10 @@
-import { FormEvent, ReactElement, useContext } from "react";
+import {
+  FormEvent,
+  ReactElement,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 import TextInput from "../TextInput/TextInput.tsx";
 import TextArea from "../TextArea/TextArea.tsx";
@@ -26,22 +32,18 @@ export default function TaskForm({
 }: Props): ReactElement {
   const { createDream, editDream } = useContext(DreamsContext);
 
+  const [dream, setDream] = useState<Dream>(generateEmptyDream);
+
+  useEffect(() => {
+    setDream(editingDream ? { ...editingDream } : generateEmptyDream());
+  }, [editingDream]);
+
   const cancelButtonClickHandler = (): void => {
     onCancel();
   };
 
   const formSubmitHandler = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-
-    const dream: Dream = {
-      id: editingDream?.id ?? crypto.randomUUID(),
-      title: formData.get("title") as string,
-      description: formData.get("description") as string,
-      date: new Date(formData.get("date") as string),
-      vibe: formData.get("vibe") as Vibe,
-    };
 
     if (editingDream) {
       editDream(dream);
@@ -60,14 +62,22 @@ export default function TaskForm({
       <TextInput
         name="title"
         placeholder="Input your title..."
-        defaultValue={editingDream?.title}
+        value={dream.title}
+        onChange={(e) => setDream((old) => ({ ...old, title: e.target.value }))}
       />
       <TextArea
         name="description"
         placeholder="Input your description..."
-        defaultValue={editingDream?.description}
+        value={dream.description}
+        onChange={(e) =>
+          setDream((old) => ({ ...old, description: e.target.value }))
+        }
       />
-      <DateInput name="date" defaultValue={toDateString(editingDream?.date)} />
+      <DateInput
+        name="date"
+        value={dream.date}
+        onChange={(e) => setDream((old) => ({ ...old, date: e.target.value }))}
+      />
       <Select
         name="vibe"
         variant="outlined"
@@ -75,7 +85,10 @@ export default function TaskForm({
           { value: "good", label: "😃 Good" },
           { value: "bad", label: "😭 Bad" },
         ]}
-        defaultValue={editingDream?.vibe}
+        value={dream.vibe}
+        onChange={(e) =>
+          setDream((old) => ({ ...old, vibe: e.target.value as Vibe }))
+        }
       />
       <div className={styles.actions}>
         <Button
@@ -91,14 +104,12 @@ export default function TaskForm({
   );
 }
 
-function toDateString(date: Date | undefined): string {
-  if (!date) {
-    return "";
-  }
-
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
-}
-
-function pad(text: number): string {
-  return text.toString().padStart(2, "0");
+function generateEmptyDream(): Dream {
+  return {
+    id: crypto.randomUUID(),
+    title: "",
+    description: "",
+    date: "",
+    vibe: "good",
+  };
 }
