@@ -1,3 +1,5 @@
+import i18next from "i18next";
+
 import { toast } from "react-toastify";
 
 import { MODAL_CONTAINER_ID } from "../constants/id.ts";
@@ -10,39 +12,39 @@ const MAX_DESCRIPTION_LENGTH = 500;
 
 type ValidationRule = {
   isValid: (dream: Dream) => boolean;
-  message: string;
+  messageKey: string;
 };
 
 const validationRules: ValidationRule[] = [
   {
     isValid: (dream) => Boolean(dream.title?.trim()),
-    message: "Title is required.",
+    messageKey: "validation.title.required",
   },
   {
     isValid: (dream) => Boolean(dream.description?.trim()),
-    message: "Description is required.",
+    messageKey: "validation.description.required",
   },
   {
     isValid: (dream) => Boolean(dream.date),
-    message: "Date is required.",
+    messageKey: "validation.date.required",
   },
   {
     isValid: (dream) => Boolean(dream.vibe),
-    message: "Vibe is required.",
+    messageKey: "validation.vibe.required",
   },
   {
     isValid: (dream) =>
       dream.title.length >= MIN_TITLE_LENGTH &&
       dream.title.length <= MAX_TITLE_LENGTH,
-    message: `Title must be between ${MIN_TITLE_LENGTH} and ${MAX_TITLE_LENGTH} characters.`,
+    messageKey: "validation.title.length",
   },
   {
     isValid: (dream) => dream.description.length <= MAX_DESCRIPTION_LENGTH,
-    message: `Description cannot be longer than ${MAX_DESCRIPTION_LENGTH} characters.`,
+    messageKey: "validation.description.length",
   },
   {
     isValid: (dream) => dream.vibe === "good" || dream.vibe === "bad",
-    message: "Vibe must be either good or bad.",
+    messageKey: "validation.vibe.invalid",
   },
   {
     isValid: (dream) => {
@@ -51,18 +53,23 @@ const validationRules: ValidationRule[] = [
       today.setHours(23, 59, 59, 999);
       return dreamDate <= today;
     },
-    message: "Date cannot be in the future.",
+    messageKey: "validation.date.future",
   },
 ];
 
-function showValidationError(message: string): void {
+function showValidationError(messageKey: string): void {
+  const message = i18next.t(messageKey, {
+    minTitleLength: MIN_TITLE_LENGTH,
+    maxTitleLength: MAX_TITLE_LENGTH,
+    maxDescriptionLength: MAX_DESCRIPTION_LENGTH,
+  });
   toast.error(message, { containerId: MODAL_CONTAINER_ID });
 }
 
 export function validateDream(dream: Dream): boolean {
   for (const rule of validationRules) {
     if (!rule.isValid(dream)) {
-      showValidationError(rule.message);
+      showValidationError(rule.messageKey);
       return false;
     }
   }

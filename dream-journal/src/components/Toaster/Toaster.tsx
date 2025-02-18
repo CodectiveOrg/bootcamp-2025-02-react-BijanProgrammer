@@ -1,5 +1,7 @@
 import { ReactElement, useContext } from "react";
 
+import { useTranslation } from "react-i18next";
+
 import { Bounce, ToastContainer, ToastContainerProps } from "react-toastify";
 
 import { ThemeContext } from "../../context/theme-context.ts";
@@ -7,6 +9,8 @@ import { ThemeContext } from "../../context/theme-context.ts";
 type Props = Partial<ToastContainerProps>;
 
 function Toaster(props: Props): ReactElement {
+  const { i18n } = useTranslation();
+
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -16,7 +20,7 @@ function Toaster(props: Props): ReactElement {
       hideProgressBar={false}
       newestOnTop
       closeOnClick={false}
-      rtl={false}
+      rtl={i18n.dir() === "rtl"}
       pauseOnFocusLoss
       draggable
       pauseOnHover

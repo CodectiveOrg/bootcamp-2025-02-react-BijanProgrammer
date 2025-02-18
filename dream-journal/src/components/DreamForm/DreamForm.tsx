@@ -8,11 +8,11 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-import TextInput from "../TextInput/TextInput.tsx";
-import TextArea from "../TextArea/TextArea.tsx";
+import Button from "../Button/Button.tsx";
 import DateInput from "../DateInput/DateInput.tsx";
 import Select from "../Select/Select.tsx";
-import Button from "../Button/Button.tsx";
+import TextArea from "../TextArea/TextArea.tsx";
+import TextInput from "../TextInput/TextInput.tsx";
 
 import { DreamsContext } from "../../context/dreams-context.ts";
 
@@ -108,8 +108,7 @@ export default function DreamForm({
         <Button
           type="button"
           variant="outlined"
-          onClick={cancelButtonClickHandler}
-        >
+          onClick={cancelButtonClickHandler}>
           {t("dreams.actions.cancel")}
         </Button>
         <Button>
