@@ -1,10 +1,12 @@
 import { ReactElement, useContext } from "react";
 
-import { Bounce, ToastContainer } from "react-toastify";
+import { Bounce, ToastContainer, ToastContainerProps } from "react-toastify";
 
 import { ThemeContext } from "../../context/theme-context.ts";
 
-function Toaster(): ReactElement {
+type Props = Partial<ToastContainerProps>;
+
+function Toaster(props: Props): ReactElement {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -21,6 +23,7 @@ function Toaster(): ReactElement {
       theme={theme}
       transition={Bounce}
       aria-label={undefined}
+      {...props}
     />
   );
 }

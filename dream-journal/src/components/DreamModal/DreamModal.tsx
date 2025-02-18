@@ -1,10 +1,12 @@
 import { forwardRef, ReactElement, useImperativeHandle, useRef } from "react";
 
 import DreamForm from "../DreamForm/DreamForm.tsx";
+import Toaster from "../Toaster/Toaster.tsx";
 
 import { Dream } from "../../types/dream.ts";
 
 import styles from "./DreamModal.module.css";
+import { MODAL_CONTAINER_ID } from "../../constants/id.ts";
 
 export type DreamModalRef = Pick<HTMLDialogElement, "showModal" | "close">;
 
@@ -38,6 +40,7 @@ const DreamModal = forwardRef<DreamModalRef, Props>(function DreamModal(
         onCancel={closeModal}
         onSubmit={closeModal}
       />
+      <Toaster containerId={MODAL_CONTAINER_ID} />
     </dialog>
   );
 });
