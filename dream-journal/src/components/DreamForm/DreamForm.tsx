@@ -6,6 +6,8 @@ import {
   useState,
 } from "react";
 
+import { useTranslation } from "react-i18next";
+
 import TextInput from "../TextInput/TextInput.tsx";
 import TextArea from "../TextArea/TextArea.tsx";
 import DateInput from "../DateInput/DateInput.tsx";
@@ -17,8 +19,9 @@ import { DreamsContext } from "../../context/dreams-context.ts";
 import { Dream } from "../../types/dream.ts";
 import { Vibe } from "../../types/vibe.ts";
 
-import styles from "./DreamForm.module.css";
 import { validateDream } from "../../validation/dream-validation.ts";
+
+import styles from "./DreamForm.module.css";
 
 type Props = {
   editingDream?: Dream;
@@ -31,6 +34,8 @@ export default function DreamForm({
   onCancel,
   onSubmit,
 }: Props): ReactElement {
+  const { t } = useTranslation();
+
   const { createDream, editDream } = useContext(DreamsContext);
 
   const [dream, setDream] = useState<Dream>(generateEmptyDream);
@@ -64,17 +69,19 @@ export default function DreamForm({
   return (
     <form className={styles["create-form"]} onSubmit={formSubmitHandler}>
       <div className={styles.title}>
-        {editingDream ? `Edit ${editingDream.title}` : "Create a New Dream"}
+        {editingDream
+          ? t("dreams.create.edit", { title: editingDream.title })
+          : t("dreams.create.title")}
       </div>
       <TextInput
         name="title"
-        placeholder="Input your title..."
+        placeholder={t("dreams.form.title.placeholder")}
         value={dream.title}
         onChange={(e) => setDream((old) => ({ ...old, title: e.target.value }))}
       />
       <TextArea
         name="description"
-        placeholder="Input your description..."
+        placeholder={t("dreams.form.description.placeholder")}
         value={dream.description}
         onChange={(e) =>
           setDream((old) => ({ ...old, description: e.target.value }))
@@ -89,8 +96,8 @@ export default function DreamForm({
         name="vibe"
         variant="outlined"
         options={[
-          { value: "good", label: "😃 Good" },
-          { value: "bad", label: "😭 Bad" },
+          { value: "good", label: t("dreams.form.vibe.good") },
+          { value: "bad", label: t("dreams.form.vibe.bad") },
         ]}
         value={dream.vibe}
         onChange={(e) =>
@@ -103,9 +110,13 @@ export default function DreamForm({
           variant="outlined"
           onClick={cancelButtonClickHandler}
         >
-          Cancel
+          {t("dreams.actions.cancel")}
         </Button>
-        <Button>{editingDream ? "Confirm" : "Create"}</Button>
+        <Button>
+          {editingDream
+            ? t("dreams.actions.confirm")
+            : t("dreams.actions.create")}
+        </Button>
       </div>
     </form>
   );

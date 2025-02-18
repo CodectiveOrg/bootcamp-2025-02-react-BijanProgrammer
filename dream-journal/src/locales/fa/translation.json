@@ -1,0 +1,56 @@
+{
+  "app": {
+    "title": "دفترچه‌ی خواب"
+  },
+  "languages": {
+    "english": "English",
+    "farsi": "Farsi"
+  },
+  "dreams": {
+    "create": {
+      "title": "ایجاد خواب جدید",
+      "edit": "ویرایش {{title}}"
+    },
+    "form": {
+      "title": {
+        "placeholder": "عنوان خود را وارد کنید..."
+      },
+      "description": {
+        "placeholder": "توضیحات خود را وارد کنید..."
+      },
+      "vibe": {
+        "all": "همه",
+        "good": "😃 خوب",
+        "bad": "😭 بد"
+      }
+    },
+    "actions": {
+      "create": "ایجاد",
+      "confirm": "تایید",
+      "cancel": "لغو"
+    }
+  },
+  "counter": {
+    "label": "شمارش: {{count}}"
+  },
+  "validation": {
+    "required": "این فیلد الزامی است",
+    "date": {
+      "required": "تاریخ الزامی است",
+      "invalid": "فرمت تاریخ نامعتبر است"
+    },
+    "title": {
+      "required": "عنوان الزامی است",
+      "tooLong": "عنوان باید کمتر از {{max}} کاراکتر باشد"
+    },
+    "description": {
+      "required": "توضیحات الزامی است",
+      "tooLong": "توضیحات باید کمتر از {{max}} کاراکتر باشد"
+    }
+  },
+  "toolbar": {
+    "search": {
+      "placeholder": "جستجوی خواب‌ها..."
+    }
+  }
+}
