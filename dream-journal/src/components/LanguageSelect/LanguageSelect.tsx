@@ -11,8 +11,9 @@ function LanguageSelect(): ReactElement {
     <Button
       variant="solid"
       size="medium"
-      onClick={() => i18n.changeLanguage(i18n.language === "en" ? "fa" : "en")}>
-      {i18n.language === "en" ? t("farsi") : t("english")}
+      onClick={() => i18n.changeLanguage(i18n.language === "en" ? "fa" : "en")}
+    >
+      {i18n.language === "en" ? t("languages.farsi") : t("languages.english")}
     </Button>
   );
 }
