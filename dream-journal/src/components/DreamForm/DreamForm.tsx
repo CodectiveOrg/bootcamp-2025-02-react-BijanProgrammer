@@ -17,7 +17,7 @@ import { DreamsContext } from "../../context/dreams-context.ts";
 import { Dream } from "../../types/dream.ts";
 import { Vibe } from "../../types/vibe.ts";
 
-import styles from "./TaskForm.module.css";
+import styles from "./DreamForm.module.css";
 
 type Props = {
   editingDream?: Dream;
@@ -25,7 +25,7 @@ type Props = {
   onSubmit: VoidFunction;
 };
 
-export default function TaskForm({
+export default function DreamForm({
   editingDream,
   onCancel,
   onSubmit,

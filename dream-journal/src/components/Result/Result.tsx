@@ -1,7 +1,7 @@
 import { ReactNode, useContext, useRef, useState } from "react";
 
 import Button from "../Button/Button.tsx";
-import TaskModal, { TaskModalRef } from "../TaskModal/TaskModal.tsx";
+import DreamModal, { DreamModalRef } from "../DreamModal/DreamModal.tsx";
 
 import { DreamsContext } from "../../context/dreams-context.ts";
 
@@ -17,7 +17,7 @@ function Result(): ReactNode {
 
   const [editingDream, setEditingDream] = useState<Dream | null>(null);
 
-  const modalRef = useRef<TaskModalRef>(null);
+  const modalRef = useRef<DreamModalRef>(null);
 
   const editButtonClickHandler = (dream: Dream): void => {
     setEditingDream(dream);
@@ -52,7 +52,7 @@ function Result(): ReactNode {
           </li>
         ))}
       </ul>
-      <TaskModal ref={modalRef} editingDream={editingDream ?? undefined} />
+      <DreamModal ref={modalRef} editingDream={editingDream ?? undefined} />
     </>
   );
 }

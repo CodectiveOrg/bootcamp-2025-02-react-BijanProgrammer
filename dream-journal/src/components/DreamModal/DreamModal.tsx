@@ -1,18 +1,18 @@
 import { forwardRef, ReactElement, useImperativeHandle, useRef } from "react";
 
-import TaskForm from "../TaskForm/TaskForm.tsx";
+import DreamForm from "../DreamForm/DreamForm.tsx";
 
 import { Dream } from "../../types/dream.ts";
 
-import styles from "./TaskModal.module.css";
+import styles from "./DreamModal.module.css";
 
-export type TaskModalRef = Pick<HTMLDialogElement, "showModal" | "close">;
+export type DreamModalRef = Pick<HTMLDialogElement, "showModal" | "close">;
 
 type Props = {
   editingDream?: Dream;
 };
 
-const TaskModal = forwardRef<TaskModalRef, Props>(function TaskModal(
+const DreamModal = forwardRef<DreamModalRef, Props>(function DreamModal(
   { editingDream },
   outerRef,
 ): ReactElement {
@@ -32,8 +32,8 @@ const TaskModal = forwardRef<TaskModalRef, Props>(function TaskModal(
   };
 
   return (
-    <dialog ref={innerRef} className={styles["task-modal"]}>
-      <TaskForm
+    <dialog ref={innerRef} className={styles["dream-modal"]}>
+      <DreamForm
         editingDream={editingDream}
         onCancel={closeModal}
         onSubmit={closeModal}
@@ -42,4 +42,4 @@ const TaskModal = forwardRef<TaskModalRef, Props>(function TaskModal(
   );
 });
 
-export default TaskModal;
+export default DreamModal;
