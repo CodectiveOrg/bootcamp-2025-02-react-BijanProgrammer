@@ -1,57 +1,45 @@
-import {
-  forwardRef,
-  ReactElement,
-  useContext,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-} from "react";
+import { forwardRef, ReactElement, useImperativeHandle, useRef } from "react";
 
 import TaskForm from "../TaskForm/TaskForm.tsx";
 
-import { DreamsContext } from "../../context/dreams-context.ts";
+import { Dream } from "../../types/dream.ts";
 
 import styles from "./TaskModal.module.css";
 
 export type TaskModalRef = Pick<HTMLDialogElement, "showModal" | "close">;
 
-const TaskModal = forwardRef<TaskModalRef>(
-  function TaskModal(_, outerRef): ReactElement {
-    const { editingDream, setEditingDream } = useContext(DreamsContext);
+type Props = {
+  editingDream?: Dream;
+};
 
-    const innerRef = useRef<HTMLDialogElement>(null);
+const TaskModal = forwardRef<TaskModalRef, Props>(function TaskModal(
+  { editingDream },
+  outerRef,
+): ReactElement {
+  const innerRef = useRef<HTMLDialogElement>(null);
 
-    useEffect(() => {
-      if (editingDream) {
-        innerRef.current?.showModal();
-      }
-    }, [editingDream]);
-
-    useImperativeHandle(outerRef, () => ({
-      showModal: (): void => {
-        innerRef.current?.showModal();
-      },
-      close: (): void => {
-        innerRef.current?.close();
-      },
-    }));
-
-    const closeModal = (): void => {
+  useImperativeHandle(outerRef, () => ({
+    showModal: (): void => {
+      innerRef.current?.showModal();
+    },
+    close: (): void => {
       innerRef.current?.close();
-      setEditingDream(null);
-    };
+    },
+  }));
 
-    return (
-      <dialog ref={innerRef} className={styles["task-modal"]}>
-        {editingDream && (
-          <TaskForm onCancel={closeModal} onSubmit={closeModal} />
-        )}
-        {!editingDream && (
-          <TaskForm onCancel={closeModal} onSubmit={closeModal} />
-        )}
-      </dialog>
-    );
-  },
-);
+  const closeModal = (): void => {
+    innerRef.current?.close();
+  };
+
+  return (
+    <dialog ref={innerRef} className={styles["task-modal"]}>
+      <TaskForm
+        editingDream={editingDream}
+        onCancel={closeModal}
+        onSubmit={closeModal}
+      />
+    </dialog>
+  );
+});
 
 export default TaskModal;

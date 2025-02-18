@@ -12,7 +12,6 @@ type Props = PropsWithChildren;
 
 export default function DreamsProvider({ children }: Props): ReactNode {
   const [dreams, setDreams] = useState<Dream[]>(loadDreamsInitialState);
-  const [editingDream, setEditingDream] = useState<Dream | null>(null);
 
   useEffect(() => {
     localStorage.setItem(DREAMS_LOCAL_STORAGE_KEY, JSON.stringify(dreams));
@@ -37,8 +36,6 @@ export default function DreamsProvider({ children }: Props): ReactNode {
         createDream,
         editDream,
         removeDream,
-        editingDream,
-        setEditingDream,
       }}
     >
       {children}

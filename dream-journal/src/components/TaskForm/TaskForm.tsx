@@ -14,12 +14,17 @@ import { Vibe } from "../../types/vibe.ts";
 import styles from "./TaskForm.module.css";
 
 type Props = {
+  editingDream?: Dream;
   onCancel: VoidFunction;
   onSubmit: VoidFunction;
 };
 
-export default function TaskForm({ onCancel, onSubmit }: Props): ReactElement {
-  const { createDream, editDream, editingDream } = useContext(DreamsContext);
+export default function TaskForm({
+  editingDream,
+  onCancel,
+  onSubmit,
+}: Props): ReactElement {
+  const { createDream, editDream } = useContext(DreamsContext);
 
   const cancelButtonClickHandler = (): void => {
     onCancel();
@@ -49,7 +54,9 @@ export default function TaskForm({ onCancel, onSubmit }: Props): ReactElement {
 
   return (
     <form className={styles["create-form"]} onSubmit={formSubmitHandler}>
-      <div className={styles.title}>Create a New Dream</div>
+      <div className={styles.title}>
+        {editingDream ? `Edit ${editingDream.title}` : "Create a New Dream"}
+      </div>
       <TextInput
         name="title"
         placeholder="Input your title..."
@@ -78,7 +85,7 @@ export default function TaskForm({ onCancel, onSubmit }: Props): ReactElement {
         >
           Cancel
         </Button>
-        <Button>Apply</Button>
+        <Button>{editingDream ? "Edit" : "Submit"}</Button>
       </div>
     </form>
   );
