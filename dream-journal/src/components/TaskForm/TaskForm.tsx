@@ -51,6 +51,8 @@ export default function TaskForm({
       createDream(dream);
     }
 
+    setDream(generateEmptyDream());
+
     onSubmit();
   };
 
@@ -98,7 +100,7 @@ export default function TaskForm({
         >
           Cancel
         </Button>
-        <Button>{editingDream ? "Edit" : "Submit"}</Button>
+        <Button>{editingDream ? "Confirm" : "Create"}</Button>
       </div>
     </form>
   );
