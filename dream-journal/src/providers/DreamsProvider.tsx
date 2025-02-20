@@ -1,18 +1,17 @@
 import { PropsWithChildren, ReactNode, useEffect, useState } from "react";
 
+import { toast } from "react-toastify";
+
 import { DREAMS_LOCAL_STORAGE_KEY } from "../constants/local-storage-keys.ts";
 
 import { DreamsContext } from "../context/dreams-context.ts";
 
 import { Dream } from "../types/dream.ts";
 
-type LocalStorageDream = Omit<Dream, "date"> & { date: string };
-
 type Props = PropsWithChildren;
 
 export default function DreamsProvider({ children }: Props): ReactNode {
   const [dreams, setDreams] = useState<Dream[]>(loadDreamsInitialState);
-  const [editingDream, setEditingDream] = useState<Dream | null>(null);
 
   useEffect(() => {
     localStorage.setItem(DREAMS_LOCAL_STORAGE_KEY, JSON.stringify(dreams));
@@ -20,14 +19,17 @@ export default function DreamsProvider({ children }: Props): ReactNode {
 
   const createDream = (dream: Dream): void => {
     setDreams((old) => [...old, { ...dream }]);
+    toast.success("Dream created successfully.");
   };
 
   const editDream = (dream: Dream): void => {
     setDreams((old) => old.map((x) => (x.id === dream.id ? { ...dream } : x)));
+    toast.success("Dream edited successfully.");
   };
 
   const removeDream = (id: string): void => {
     setDreams((old) => old.filter((x) => x.id !== id));
+    toast.success("Dream removed successfully.");
   };
 
   return (
@@ -37,8 +39,6 @@ export default function DreamsProvider({ children }: Props): ReactNode {
         createDream,
         editDream,
         removeDream,
-        editingDream,
-        setEditingDream,
       }}
     >
       {children}
@@ -53,10 +53,5 @@ function loadDreamsInitialState(): Dream[] {
     return [];
   }
 
-  const parsedDreams = JSON.parse(item) as LocalStorageDream[];
-
-  return parsedDreams.map((dream) => ({
-    ...dream,
-    date: new Date(dream.date),
-  }));
+  return JSON.parse(item);
 }

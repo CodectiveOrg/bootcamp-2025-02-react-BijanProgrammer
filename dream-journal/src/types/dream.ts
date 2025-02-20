@@ -4,6 +4,6 @@ export type Dream = {
   id: string;
   title: string;
   description: string;
-  date: Date;
+  date: string;
   vibe: Vibe;
 };
