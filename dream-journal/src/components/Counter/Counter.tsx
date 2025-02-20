@@ -1,5 +1,7 @@
 import { forwardRef, ReactElement, useImperativeHandle, useState } from "react";
 
+import { useTranslation } from "react-i18next";
+
 import styles from "./Counter.module.css";
 
 export type CounterRef = {
@@ -7,6 +9,8 @@ export type CounterRef = {
 };
 
 const Counter = forwardRef<CounterRef>(function Counter(_, ref): ReactElement {
+  const { t } = useTranslation();
+
   const [count, setCount] = useState<number>(0);
 
   useImperativeHandle(ref, () => ({
@@ -15,7 +19,7 @@ const Counter = forwardRef<CounterRef>(function Counter(_, ref): ReactElement {
     },
   }));
 
-  return <div className={styles.counter}>Count: {count}</div>;
+  return <div className={styles.counter}>{t("counter.label", { count })}</div>;
 });
 
 export default Counter;

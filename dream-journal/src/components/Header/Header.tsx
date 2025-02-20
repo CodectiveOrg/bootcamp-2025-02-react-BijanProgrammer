@@ -9,7 +9,7 @@ function Header(): ReactNode {
 
   return (
     <header className={styles.header}>
-      <h1>{t("title")}</h1>
+      <h1>{t("app.title")}</h1>
     </header>
   );
 }
