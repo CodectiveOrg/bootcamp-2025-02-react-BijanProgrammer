@@ -41,11 +41,11 @@
     },
     "title": {
       "required": "Title is required",
-      "tooLong": "Title must be less than {{max}} characters"
+      "length": "Title must be between {{minTitleLength}} and {{maxTitleLength}} characters"
     },
     "description": {
       "required": "Description is required",
-      "tooLong": "Description must be less than {{max}} characters"
+      "length": "Description must be less than {{maxDescriptionLength}} characters"
     }
   },
   "toolbar": {

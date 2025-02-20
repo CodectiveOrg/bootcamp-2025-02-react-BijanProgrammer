@@ -41,11 +41,11 @@
     },
     "title": {
       "required": "عنوان الزامی است",
-      "tooLong": "عنوان باید کمتر از {{max}} کاراکتر باشد"
+      "length": "عنوان باید بین {{minTitleLength}} و {{maxTitleLength}} کاراکتر باشد"
     },
     "description": {
       "required": "توضیحات الزامی است",
-      "tooLong": "توضیحات باید کمتر از {{max}} کاراکتر باشد"
+      "length": "توضیحات باید کمتر از {{maxDescriptionLength}} کاراکتر باشد"
     }
   },
   "toolbar": {

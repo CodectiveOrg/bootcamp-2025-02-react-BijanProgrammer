@@ -8,20 +8,18 @@ import {
 
 import { useTranslation } from "react-i18next";
 
-import { toast } from "react-toastify";
-
 import Button from "../Button/Button.tsx";
 import DateInput from "../DateInput/DateInput.tsx";
 import Select from "../Select/Select.tsx";
 import TextArea from "../TextArea/TextArea.tsx";
 import TextInput from "../TextInput/TextInput.tsx";
 
-import { MODAL_CONTAINER_ID } from "../../constants/id.ts";
-
 import { DreamsContext } from "../../context/dreams-context.ts";
 
 import { Dream } from "../../types/dream.ts";
 import { Vibe } from "../../types/vibe.ts";
+
+import { validateDream } from "../../validation/dream-validation.ts";
 
 import styles from "./DreamForm.module.css";
 
@@ -53,26 +51,7 @@ export default function DreamForm({
   const formSubmitHandler = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    if (!dream.title) {
-      toast.error("Title is required.", { containerId: MODAL_CONTAINER_ID });
-      return;
-    }
-
-    if (!dream.description) {
-      toast.error("Description is required.", {
-        containerId: MODAL_CONTAINER_ID,
-      });
-
-      return;
-    }
-
-    if (!dream.date) {
-      toast.error("Date is required.", { containerId: MODAL_CONTAINER_ID });
-      return;
-    }
-
-    if (!dream.vibe) {
-      toast.error("Vibe is required.", { containerId: MODAL_CONTAINER_ID });
+    if (!validateDream(dream)) {
       return;
     }
 
@@ -129,7 +108,8 @@ export default function DreamForm({
         <Button
           type="button"
           variant="outlined"
-          onClick={cancelButtonClickHandler}>
+          onClick={cancelButtonClickHandler}
+        >
           {t("dreams.actions.cancel")}
         </Button>
         <Button>
