@@ -3,6 +3,7 @@ import { ReactNode, useContext } from "react";
 import Button from "../Button/Button.tsx";
 import Select from "../Select/Select.tsx";
 import TextInput from "../TextInput/TextInput.tsx";
+import LanguageButton from "../LanguageButton/LanguageButton.tsx";
 
 import { ThemeContext } from "../../context/theme-context.ts";
 
@@ -29,6 +30,7 @@ function Toolbar(): ReactNode {
           { value: "bad", label: "Bad" },
         ]}
       ></Select>
+      <LanguageButton />
       <Button
         variant="solid"
         size="medium"
