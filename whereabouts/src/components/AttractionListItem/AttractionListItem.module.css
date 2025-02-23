@@ -1,0 +1,41 @@
+.attraction-list-item {
+  background-color: var(--color-surface-elevated);
+  box-shadow: var(--shadow);
+
+  display: grid;
+  grid-template-columns: 20rem 1fr;
+
+  .visuals {
+    min-block-size: 100%;
+    block-size: 0;
+
+    img {
+      block-size: 100%;
+      inline-size: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .writings {
+    display: grid;
+    grid-template-areas: "title ratings" "description description";
+    grid-template-columns: 1fr auto;
+    align-items: center;
+
+    padding: 1rem;
+
+    .title {
+      grid-area: title;
+
+      font-size: var(--fz-600);
+    }
+
+    .ratings {
+      grid-area: ratings;
+    }
+
+    .description {
+      grid-area: description;
+    }
+  }
+}

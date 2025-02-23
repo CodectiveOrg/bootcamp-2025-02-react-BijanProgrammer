@@ -1,0 +1,41 @@
+import { ReactElement } from "react";
+
+import { Link } from "react-router";
+
+import FluentEmojiStar from "../../icons/FluentEmojiStar.tsx";
+
+import { Attraction } from "../../types/attraction.ts";
+
+import styles from "./AttractionListItem.module.css";
+
+type Props = {
+  attraction: Attraction;
+};
+
+function AttractionListItem({ attraction }: Props): ReactElement {
+  return (
+    <li className={styles["attraction-list-item"]}>
+      <div className={styles.visuals}>
+        <img
+          className={styles.thumbnail}
+          src={`${import.meta.env.VITE_CDN_BASE_URL}/${attraction.thumbnail}`}
+          alt=""
+        />
+      </div>
+      <div className={styles.writings}>
+        <Link to="#" className={styles.title}>
+          {attraction.title}
+        </Link>
+        <div className={styles.ratings}>
+          {attraction.averageRating} <FluentEmojiStar />
+        </div>
+        <div
+          className={styles.description}
+          dangerouslySetInnerHTML={{ __html: attraction.description }}
+        />
+      </div>
+    </li>
+  );
+}
+
+export default AttractionListItem;
