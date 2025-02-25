@@ -37,7 +37,7 @@
   }
 
   &.outlined {
-    background-color: var(--color-surface);
+    background-color: var(--color-surface-400);
     color: var(--button-color);
 
     border: 1px solid var(--button-color);

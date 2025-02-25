@@ -1,9 +1,14 @@
 .attraction-list-item {
-  background-color: var(--color-surface-elevated);
+  background-color: var(--color-surface-300);
   box-shadow: var(--shadow);
 
   display: grid;
-  grid-template-columns: 20rem 1fr;
+  grid-template-columns: 12rem 1fr;
+  gap: 1rem;
+
+  padding: 1rem;
+
+  border-radius: var(--border-radius-400);
 
   .visuals {
     min-block-size: 100%;
@@ -13,6 +18,8 @@
       block-size: 100%;
       inline-size: 100%;
       object-fit: cover;
+
+      border-radius: var(--border-radius-300);
     }
   }
 
@@ -21,13 +28,15 @@
     grid-template-areas: "title ratings" "description description";
     grid-template-columns: 1fr auto;
     align-items: center;
-
-    padding: 1rem;
+    gap: 1rem;
 
     .title {
       grid-area: title;
 
-      font-size: var(--fz-600);
+      color: var(--color-primary);
+
+      font-size: var(--fz-500);
+      font-weight: 700;
     }
 
     .ratings {
@@ -36,6 +45,12 @@
 
     .description {
       grid-area: description;
+
+      overflow: hidden;
+
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
     }
   }
 }

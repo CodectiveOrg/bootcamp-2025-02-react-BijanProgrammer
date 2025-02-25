@@ -23,7 +23,6 @@ function Header(): ReactElement {
       <Link to="/" className={styles.logo}>
         Whereabouts
       </Link>
-
       <nav>
         <ul>
           {navItems.map((item) => (

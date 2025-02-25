@@ -1,7 +1,5 @@
 import { ReactElement, useState } from "react";
 
-import clsx from "clsx";
-
 import { tags } from "../../../../data/tags.ts";
 
 import styles from "./TagFilter.module.css";
@@ -26,17 +24,20 @@ function TagFilter(): ReactElement {
   return (
     <div className={styles["tag-filter"]}>
       <div className={styles.title}>برچسب</div>
-      <ul>
+      <div className={styles.options}>
         {tags.map((tag) => (
-          <li
-            key={tag.id}
-            className={clsx(selectedTags.includes(tag.id) && styles.selected)}
-            onClick={() => toggleTag(tag.id)}
-          >
+          <label>
+            <input
+              key={tag.id}
+              name="tag-filter"
+              type="checkbox"
+              checked={selectedTags.includes(tag.id)}
+              onChange={() => toggleTag(tag.id)}
+            />
             {tag.title}
-          </li>
+          </label>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
