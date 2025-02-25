@@ -25,8 +25,8 @@ function AttractionsProvider({ children }: Props): ReactElement {
         return true;
       }
 
-      return attraction.tags.some((tag) =>
-        filters.tags.find((x) => x.id === tag.id),
+      return filters.tags.every((tag) =>
+        attraction.tags.find((x) => x.id === tag.id),
       );
     });
   }, [allAttractions, filters]);
