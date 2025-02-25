@@ -23,7 +23,7 @@ function AttractionListItem({ attraction }: Props): ReactElement {
         />
       </div>
       <div className={styles.writings}>
-        <Link to="#" className={styles.title}>
+        <Link to={`/attraction/${attraction.id}`} className={styles.title}>
           {attraction.title}
         </Link>
         <div className={styles.ratings}>
