@@ -53,4 +53,24 @@
       -webkit-line-clamp: 3;
     }
   }
+
+  .tags {
+    grid-column: 1 / -1;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    > li {
+      background-color: var(--color-surface-300);
+      color: var(--color-primary);
+      box-shadow: var(--shadow);
+
+      padding: 0.25rem 0.5rem;
+
+      border-radius: 999rem;
+
+      font-size: var(--fz-300);
+    }
+  }
 }
