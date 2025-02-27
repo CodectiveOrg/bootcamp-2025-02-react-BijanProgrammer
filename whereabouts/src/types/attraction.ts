@@ -12,6 +12,7 @@ export type Attraction = {
   workHours: AttractionWorkHours[];
   tags: AttractionTag[];
   phone: string;
+  address: string;
   url: string;
   carousel: string[];
   body: string;

@@ -4,6 +4,10 @@ import { useParams } from "react-router";
 
 import { Attraction as AttractionType } from "../../types/attraction.ts";
 
+import AttractionSidebar from "./components/AttractionSidebar/AttractionSidebar.tsx";
+import Carousel from "./components/Carousel/Carousel.tsx";
+import AttractionBody from "./components/AttractionBody/AttractionBody.tsx";
+
 import styles from "./Attraction.module.css";
 
 function Attraction(): ReactElement {
@@ -24,9 +28,15 @@ function Attraction(): ReactElement {
     fetchAttraction().then();
   }, [id]);
 
+  if (!attraction) {
+    return <>در حال بارگذاری...</>;
+  }
+
   return (
     <div className={styles.Attraction}>
-      {attraction?.title ?? "در حال بارگذاری..."}
+      <AttractionSidebar attraction={attraction} />
+      <Carousel attraction={attraction} />
+      <AttractionBody attraction={attraction} />
     </div>
   );
 }
