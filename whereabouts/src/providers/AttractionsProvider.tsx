@@ -11,8 +11,6 @@ import { FiltersContext } from "../context/filters-context.ts";
 
 import { Attraction } from "../types/attraction.ts";
 
-import { filterAttractions } from "../../api/attractions.ts";
-
 type Props = PropsWithChildren;
 
 function AttractionsProvider({ children }: Props): ReactElement {
@@ -24,12 +22,10 @@ function AttractionsProvider({ children }: Props): ReactElement {
 
   useEffect(() => {
     const fetchAttractions = async (): Promise<void> => {
-      // const response = await fetch(
-      //   `${import.meta.env.VITE_API_BASE_URL}/attractions`,
-      // );
-      // const data = await response.json();
-
-      const data = await filterAttractions(filters);
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/attraction`,
+      );
+      const data = await response.json();
 
       setFilteredAttractions(data);
     };
