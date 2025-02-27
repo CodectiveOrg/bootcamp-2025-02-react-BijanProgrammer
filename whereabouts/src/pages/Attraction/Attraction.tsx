@@ -1,8 +1,10 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement } from "react";
+
+import { useQuery } from "@tanstack/react-query";
 
 import { useParams } from "react-router";
 
-import { Attraction as AttractionType } from "../../types/attraction.ts";
+import { fetchAttraction } from "../../api/fetch-attraction.ts";
 
 import AttractionSidebar from "./components/AttractionSidebar/AttractionSidebar.tsx";
 import Carousel from "./components/Carousel/Carousel.tsx";
@@ -13,22 +15,12 @@ import styles from "./Attraction.module.css";
 function Attraction(): ReactElement {
   const { id } = useParams();
 
-  const [attraction, setAttraction] = useState<AttractionType>();
+  const { data: attraction, isFetching } = useQuery({
+    queryKey: ["attraction", id],
+    queryFn: () => fetchAttraction(id),
+  });
 
-  useEffect(() => {
-    const fetchAttraction = async (): Promise<void> => {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/attraction/${id}`,
-      );
-      const data = await response.json();
-
-      setAttraction(data);
-    };
-
-    fetchAttraction().then();
-  }, [id]);
-
-  if (!attraction) {
+  if (isFetching || !attraction) {
     return <>در حال بارگذاری...</>;
   }
 
