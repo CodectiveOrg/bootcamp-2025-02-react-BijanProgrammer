@@ -13,11 +13,22 @@ import styles from "./AttractionList.module.css";
 function AttractionList(): ReactElement {
   const { filters } = useContext(FiltersContext);
 
-  const { data } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["attractions", filters],
     queryFn: () => fetchAttractions(filters),
-    initialData: [],
   });
+
+  if (isLoading) {
+    return <>Loading...</>;
+  }
+
+  if (isError) {
+    return <>Error: {error ? error.message : "Unexpected error."}</>;
+  }
+
+  if (!data) {
+    return <>There is no data.</>;
+  }
 
   return (
     <ul className={styles["attraction-list"]}>
