@@ -17,6 +17,8 @@ function AttractionList(): ReactElement {
   const { data, isLoading, isFetching, isError, error } = useQuery({
     queryKey: ["attractions", filters],
     queryFn: () => fetchAttractions(filters),
+    staleTime: 60 * 1000,
+    placeholderData: [],
   });
 
   if (isLoading) {

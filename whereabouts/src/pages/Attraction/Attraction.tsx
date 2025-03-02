@@ -18,6 +18,7 @@ function Attraction(): ReactElement {
   const { data: attraction, isFetching } = useQuery({
     queryKey: ["attraction", id],
     queryFn: () => fetchAttraction(id),
+    staleTime: 60 * 1000,
   });
 
   if (isFetching || !attraction) {
