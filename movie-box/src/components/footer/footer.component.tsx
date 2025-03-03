@@ -7,7 +7,7 @@ function FooterComponent(): ReactElement {
 
   return (
     <footer className={styles.footer}>
-      <span>تمامی حقوق مادی و معنوی این وب‌سایت متعلق به من می‌باشد.</span>
+      <span>All rights reserved.</span>
       <span>Copyright © {year}</span>
     </footer>
   );

@@ -3,12 +3,19 @@ import { PropsWithChildren, ReactElement, useState } from "react";
 import { FiltersContext } from "../context/filters.context.ts";
 
 import { GenreType } from "../types/genre.type.ts";
-import { FiltersType as FiltersType } from "../types/filters.type.ts";
+import { FiltersType } from "../types/filters.type.ts";
 
 type Props = PropsWithChildren;
 
 function FiltersProvider({ children }: Props): ReactElement {
-  const [filters, setFilters] = useState<FiltersType>({ genres: [] });
+  const [filters, setFilters] = useState<FiltersType>({
+    query: "Movie",
+    genres: [],
+  });
+
+  const updateQuery = (query: string): void => {
+    setFilters((old) => ({ ...old, query }));
+  };
 
   const toggleGenre = (genre: GenreType): void => {
     setFilters((old) => {
@@ -25,7 +32,7 @@ function FiltersProvider({ children }: Props): ReactElement {
   };
 
   return (
-    <FiltersContext.Provider value={{ filters, toggleGenre: toggleGenre }}>
+    <FiltersContext.Provider value={{ filters, updateQuery, toggleGenre }}>
       {children}
     </FiltersContext.Provider>
   );

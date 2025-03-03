@@ -1,4 +1,4 @@
 export type GenreType = {
-  id: string;
-  title: string;
+  id: number;
+  name: string;
 };
