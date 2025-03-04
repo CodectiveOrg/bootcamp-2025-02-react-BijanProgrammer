@@ -5,13 +5,18 @@ export async function fetchMoviesApi(
   filters: FiltersType,
 ): Promise<MovieType[]> {
   const params = new URLSearchParams();
+
+  params.set("query", filters.query);
+
   filters.genres.forEach((genre) =>
     params.append("genre", genre.id.toString()),
   );
 
   const response = await fetch(
-    `${import.meta.env.VITE_API_BASE_URL}/movie?${params.toString()}`,
+    `${import.meta.env.VITE_API_BASE_URL}/search/movie?${params.toString()}`,
   );
 
-  return await response.json();
+  const data = await response.json();
+
+  return data.results;
 }

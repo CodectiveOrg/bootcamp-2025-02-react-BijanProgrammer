@@ -8,7 +8,14 @@ import { FiltersType as FiltersType } from "../types/filters.type.ts";
 type Props = PropsWithChildren;
 
 function FiltersProvider({ children }: Props): ReactElement {
-  const [filters, setFilters] = useState<FiltersType>({ genres: [] });
+  const [filters, setFilters] = useState<FiltersType>({
+    query: "Saw",
+    genres: [],
+  });
+
+  const updateQuery = (query: string): void => {
+    setFilters((old) => ({ ...old, query }));
+  };
 
   const toggleGenre = (genre: GenreType): void => {
     setFilters((old) => {
@@ -25,7 +32,7 @@ function FiltersProvider({ children }: Props): ReactElement {
   };
 
   return (
-    <FiltersContext.Provider value={{ filters, toggleGenre: toggleGenre }}>
+    <FiltersContext.Provider value={{ filters, updateQuery, toggleGenre }}>
       {children}
     </FiltersContext.Provider>
   );

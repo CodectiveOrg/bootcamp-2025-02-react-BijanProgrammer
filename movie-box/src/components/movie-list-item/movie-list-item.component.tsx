@@ -2,43 +2,47 @@ import { ReactElement } from "react";
 
 import { Link } from "react-router";
 
+import clsx from "clsx";
+
 import FluentEmojiStar from "../../icons/FluentEmojiStar.tsx";
 
-import { MovieType } from "../../types/movie.type.ts";
+import { MovieListItemType } from "../../types/movie-list-item.type.ts";
 
 import styles from "./movie-list-item.module.css";
 
 type Props = {
-  movie: MovieType;
+  movie: MovieListItemType;
 };
 
 function MovieListItemComponent({ movie }: Props): ReactElement {
   return (
     <li className={styles["movie-list-item"]}>
       <div className={styles.visuals}>
-        <img
-          className={styles.thumbnail}
-          src={`${import.meta.env.VITE_CDN_BASE_URL}/${""}`}
-          alt=""
-        />
+        <img className={clsx(styles.poster)} src={""} alt="" />
       </div>
       <div className={styles.writings}>
-        <Link to={`/movie/${movie.id}`} className={styles.title}>
+        <Link
+          to={`/movie/${movie.id}`}
+          className={styles.title}
+          title={movie.title}
+        >
           {movie.title}
         </Link>
         <div className={styles.ratings}>
-          {""} <FluentEmojiStar />
+          {movie.vote_average.toLocaleString("default", {
+            minimumFractionDigits: 1,
+            maximumFractionDigits: 1,
+            roundingMode: "floor",
+          })}{" "}
+          <FluentEmojiStar />
         </div>
-        <div
-          className={styles.description}
-          dangerouslySetInnerHTML={{ __html: "" }}
-        />
+        <div className={styles.overview}>{movie.overview}</div>
+        <ul className={styles.genres}>
+          {movie.genre_ids.map((genre) => (
+            <li key={genre}>{genre}</li>
+          ))}
+        </ul>
       </div>
-      <ul className={styles.genres}>
-        {movie.genres.map((genre) => (
-          <li key={genre.id}>{genre.title}</li>
-        ))}
-      </ul>
     </li>
   );
 }
