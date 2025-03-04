@@ -1,6 +1,6 @@
 import { CSSProperties, ReactElement } from "react";
 
-import styles from "./loading.module.css";
+import styles from "./Loading.module.css";
 
 export default function Loading(): ReactElement {
   const count: number = 16;

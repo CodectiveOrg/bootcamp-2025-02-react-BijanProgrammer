@@ -14,23 +14,18 @@ import styles from "./AttractionList.module.css";
 function AttractionList(): ReactElement {
   const { filters } = useContext(FiltersContext);
 
-  const { data, isLoading, isFetching, isError, error } = useQuery({
+  const { data, isPending, isFetching, isError, error } = useQuery({
     queryKey: ["attractions", filters],
     queryFn: () => fetchAttractions(filters),
     staleTime: 60 * 1000,
-    placeholderData: [],
   });
 
-  if (isLoading) {
+  if (isPending) {
     return <Loading />;
   }
 
   if (isError) {
     return <>Error: {error ? error.message : "Unexpected error."}</>;
-  }
-
-  if (!data) {
-    return <>There is no data.</>;
   }
 
   return (
