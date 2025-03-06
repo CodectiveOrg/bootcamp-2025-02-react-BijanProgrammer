@@ -1,5 +1,8 @@
 import { FormEvent, ReactElement, useContext } from "react";
 
+import ButtonComponent from "../../../button/button.component.tsx";
+import TextInputComponent from "../../../text-input/text-input.component.tsx";
+
 import { FiltersContext } from "../../../../context/filters.context.ts";
 
 import FilterCardComponent from "../filter-card/filter-card.component.tsx";
@@ -20,13 +23,12 @@ export default function QueryFilterComponent(): ReactElement {
   return (
     <FilterCardComponent title="Query">
       <form className={styles["query-filter"]} onSubmit={formSubmitHandler}>
-        <input
-          type="text"
+        <TextInputComponent
           name="query"
           placeholder="Movie title, actor, ..."
           defaultValue={filters.query}
         />
-        <button>Search</button>
+        <ButtonComponent>Search</ButtonComponent>
       </form>
     </FilterCardComponent>
   );

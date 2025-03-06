@@ -4,6 +4,7 @@
   --color-primary: hsl(160, 50%, 50%);
   --color-primary-fade: hsl(160, 50%, 95%);
   --color-primary-hover: hsl(160, 50%, 40%);
+  --color-primary-outline: hsl(160, 50%, 40%);
 
   --color-danger: hsl(0, 50%, 50%);
   --color-danger-fade: hsl(0, 50%, 95%);
