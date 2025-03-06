@@ -6,6 +6,7 @@ import clsx from "clsx";
 
 import FluentEmojiStar from "../../icons/FluentEmojiStar.tsx";
 
+import useConfigurationQuery from "../../queries/use-configuration.query.ts";
 import useGenresQuery from "../../queries/use-genres.query.ts";
 
 import { MovieListItemType } from "../../types/movie-list-item.type.ts";
@@ -17,6 +18,7 @@ type Props = {
 };
 
 function MovieListItemComponent({ movie }: Props): ReactElement {
+  const { data: configuration } = useConfigurationQuery();
   const { data: allGenres } = useGenresQuery();
 
   const movieGenres = useMemo(() => {
@@ -30,7 +32,11 @@ function MovieListItemComponent({ movie }: Props): ReactElement {
   return (
     <li className={styles["movie-list-item"]}>
       <div className={styles.visuals}>
-        <img className={clsx(styles.poster)} src={""} alt="" />
+        <img
+          className={clsx(styles.poster)}
+          src={`${configuration?.images.base_url}${configuration?.images.poster_sizes[0]}${movie.poster_path}`}
+          alt=""
+        />
       </div>
       <div className={styles.writings}>
         <Link
