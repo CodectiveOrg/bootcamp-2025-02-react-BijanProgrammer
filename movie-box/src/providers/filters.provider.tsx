@@ -9,7 +9,7 @@ type Props = PropsWithChildren;
 
 function FiltersProvider({ children }: Props): ReactElement {
   const [filters, setFilters] = useState<FiltersType>({
-    query: "Saw",
+    query: "movie",
     genres: [],
   });
 
