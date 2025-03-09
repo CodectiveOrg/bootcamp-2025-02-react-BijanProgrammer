@@ -5,18 +5,31 @@ import clsx from "clsx";
 import styles from "./text-input.module.css";
 
 type Props = ComponentProps<"input"> & {
+  label: string;
   suffixIcon?: ReactElement;
+  onSuffixClick?: () => void;
 };
 
 function TextInputComponent(
-  { suffixIcon, className, ...otherProps }: Props,
+  { label, suffixIcon, onSuffixClick, className, ...otherProps }: Props,
   ref: ForwardedRef<HTMLInputElement>,
 ): ReactElement {
   return (
-    <div className={clsx(styles["text-input"], className)}>
-      <input ref={ref} type="text" {...otherProps} />
-      {suffixIcon && <div className={styles.suffix}>{suffixIcon}</div>}
-    </div>
+    <label className={clsx(styles["text-input"], className)}>
+      <div className={styles.title}>{label}</div>
+      <div className={styles.box}>
+        <input ref={ref} type="text" placeholder="" {...otherProps} />
+        {suffixIcon && (
+          <button
+            type="button"
+            className={styles.suffix}
+            onClick={onSuffixClick}
+          >
+            {suffixIcon}
+          </button>
+        )}
+      </div>
+    </label>
   );
 }
 
