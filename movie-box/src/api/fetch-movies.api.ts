@@ -17,8 +17,6 @@ function generateUrl(filters: FiltersType): string {
 function generateParams(filters: FiltersType): string {
   const params = new URLSearchParams();
 
-  params.set("with_keywords", filters.query);
-
   const combinedGenres = filters.genres.map((x) => x.id).join(",");
   params.set("with_genres", combinedGenres);
 
