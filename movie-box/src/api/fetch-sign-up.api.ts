@@ -11,6 +11,7 @@ export async function fetchSignUpApi(
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(dto),
     },
   );
