@@ -15,6 +15,9 @@
     border: 1px solid currentColor;
     border-radius: 0.25rem;
 
+    font-size: 1rem;
+    line-height: 1;
+
     input {
       flex: 1 1 0;
 
@@ -25,18 +28,21 @@
 
       border: none;
 
-      font-size: 1rem;
-      line-height: 1;
-
       &:focus {
         outline: none;
       }
     }
 
-    .suffix {
+    button.suffix {
+      background-color: transparent;
+
       display: grid;
 
-      font-size: 1.25rem;
+      padding: 0;
+
+      border: none;
+
+      cursor: pointer;
     }
   }
 
