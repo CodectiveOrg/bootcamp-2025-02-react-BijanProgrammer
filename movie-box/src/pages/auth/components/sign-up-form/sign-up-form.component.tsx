@@ -1,8 +1,10 @@
 import { FormEvent, ReactElement } from "react";
 
+import { Link } from "react-router";
+
 import { useMutation } from "@tanstack/react-query";
 
-import { Link } from "react-router";
+import { toast } from "react-toastify";
 
 import { fetchSignUpApi } from "../../../../api/fetch-sign-up.api.ts";
 
@@ -33,9 +35,9 @@ export default function SignUpFormComponent(): ReactElement {
       onSuccess: (result) => {
         if ("error" in result) {
           console.log(result.validationErrors);
-          console.log("error");
+          toast.error(result.message);
         } else {
-          console.log("success");
+          toast.success(result.message);
         }
       },
     });

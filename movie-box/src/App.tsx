@@ -1,5 +1,7 @@
 import { Route, Routes } from "react-router";
 
+import Toaster from "./components/toaster/toaster.tsx";
+
 import RootLayout from "./layouts/root/root.layout.tsx";
 
 import HomePage from "./pages/home/home.page.tsx";
@@ -22,6 +24,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
+      <Toaster />
     </QueryProvider>
   );
 }
