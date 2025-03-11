@@ -1,4 +1,4 @@
-import { FormEvent, ReactElement } from "react";
+import { FormEvent, ReactElement, useState } from "react";
 
 import { Link } from "react-router";
 
@@ -12,11 +12,15 @@ import ButtonComponent from "../../../../components/button/button.component.tsx"
 import TextInputComponent from "../../../../components/text-input/text-input.component.tsx";
 import PasswordInputComponent from "../../../../components/password-input/password-input.component.tsx";
 
+import { ValidationErrors } from "../../../../dto/response.dto.ts";
 import { SignUpDto } from "../../../../dto/sign-up.dto.ts";
 
 import styles from "./sign-up-form.module.css";
 
 export default function SignUpFormComponent(): ReactElement {
+  const [validationErrors, setValidationErrors] =
+    useState<ValidationErrors<SignUpDto>>();
+
   const mutation = useMutation({
     mutationFn: fetchSignUpApi,
   });
@@ -34,7 +38,7 @@ export default function SignUpFormComponent(): ReactElement {
     mutation.mutate(dto, {
       onSuccess: (result) => {
         if ("error" in result) {
-          console.log(result.validationErrors);
+          setValidationErrors(result.validationErrors);
           toast.error(result.message);
         } else {
           toast.success(result.message);
@@ -47,11 +51,16 @@ export default function SignUpFormComponent(): ReactElement {
     <div className={styles["sign-up-form"]}>
       <h1>Sign Up!</h1>
       <form onSubmit={formSubmitHandler}>
-        <TextInputComponent label="Username" name="username" />
+        <TextInputComponent
+          label="Username"
+          name="username"
+          errors={validationErrors?.username}
+        />
         <PasswordInputComponent
           label="Password"
           name="password"
           autoComplete="new-password"
+          errors={validationErrors?.password}
         />
         <ButtonComponent>Sign Up</ButtonComponent>
       </form>

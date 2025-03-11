@@ -1,60 +1,72 @@
 .text-input {
-  .title {
-    font-size: var(--fz-300);
+  display: grid;
+  grid-template-areas: "title errors" "box box";
+  grid-template-columns: 1fr auto;
+
+  .errors {
+    grid-area: errors;
   }
 
-  .box {
-    color: var(--color-border);
+  label {
+    display: contents;
 
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    .title {
+      grid-area: title;
 
-    padding: 0.5rem;
+      font-size: var(--fz-300);
+    }
 
-    border: 1px solid currentColor;
-    border-radius: 0.25rem;
+    .box {
+      grid-area: box;
 
-    font-size: 1rem;
-    line-height: 1;
+      color: var(--color-border);
 
-    input {
-      flex: 1 1 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
 
-      background-color: var(--color-surface-300);
-      color: inherit;
+      padding: 0.5rem;
 
-      block-size: 1em;
+      border: 1px solid currentColor;
+      border-radius: 0.25rem;
 
-      border: none;
+      font-size: 1rem;
+      line-height: 1;
 
-      &:focus {
-        outline: none;
+      input {
+        flex: 1 1 0;
+
+        background-color: var(--color-surface-300);
+        color: inherit;
+
+        block-size: 1em;
+
+        border: none;
+
+        &:focus {
+          outline: none;
+        }
       }
     }
 
-    button.suffix {
-      background-color: transparent;
-
-      display: grid;
-
-      padding: 0;
-
-      border: none;
-
-      cursor: pointer;
+    &:where(:has(input:not(:placeholder-shown))) {
+      .box {
+        color: var(--color-text-400);
+      }
     }
-  }
 
-  &:where(:has(input:not(:placeholder-shown))) {
-    .box {
-      color: var(--color-text-400);
+    &.invalid {
+      .title,
+      .box {
+        color: var(--color-danger);
+      }
     }
-  }
 
-  &:focus-within {
-    .box {
-      color: var(--color-primary);
+    &:focus-within {
+      .title,
+      .box {
+        color: var(--color-primary);
+      }
     }
   }
 }
