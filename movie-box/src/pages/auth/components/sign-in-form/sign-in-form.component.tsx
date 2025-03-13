@@ -1,8 +1,10 @@
-import { FormEvent, ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 
 import { Link, useNavigate } from "react-router";
 
 import { useMutation } from "@tanstack/react-query";
+
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 import { toast } from "react-toastify";
 
@@ -27,23 +29,22 @@ export default function SignInFormComponent(): ReactElement {
     mutationFn: fetchSignInApi,
   });
 
-  const formSubmitHandler = (e: FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
+  const { control, handleSubmit, reset } = useForm<SignInDto>({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
 
-    const formData = new FormData(e.currentTarget);
-
-    const dto: SignInDto = {
-      username: formData.get("username") as string,
-      password: formData.get("password") as string,
-    };
-
-    mutation.mutate(dto, {
+  const formSubmitHandler: SubmitHandler<SignInDto> = (data): void => {
+    mutation.mutate(data, {
       onSuccess: (result) => {
         if ("error" in result) {
           setValidationErrors(result.validationErrors);
           toast.error(result.message);
         } else {
           toast.success(result.message);
+          reset();
           navigate("/dashboard");
         }
       },
@@ -53,17 +54,29 @@ export default function SignInFormComponent(): ReactElement {
   return (
     <div className={styles["auth-form"]}>
       <h1>Sign In!</h1>
-      <form onSubmit={formSubmitHandler}>
-        <TextInputComponent
-          label="Username"
+      <form onSubmit={handleSubmit(formSubmitHandler)}>
+        <Controller
+          control={control}
           name="username"
-          errors={validationErrors?.username}
+          render={({ field }) => (
+            <TextInputComponent
+              label="Username"
+              errors={validationErrors?.username}
+              {...field}
+            />
+          )}
         />
-        <PasswordInputComponent
-          label="Password"
+        <Controller
+          control={control}
           name="password"
-          autoComplete="current-password"
-          errors={validationErrors?.password}
+          render={({ field }) => (
+            <PasswordInputComponent
+              label="Password"
+              autoComplete="current-password"
+              errors={validationErrors?.password}
+              {...field}
+            />
+          )}
         />
         <ButtonComponent>Sign In</ButtonComponent>
       </form>
