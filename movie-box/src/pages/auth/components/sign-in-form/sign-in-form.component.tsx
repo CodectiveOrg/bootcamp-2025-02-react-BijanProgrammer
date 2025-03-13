@@ -15,7 +15,7 @@ import PasswordInputComponent from "../../../../components/password-input/passwo
 import { ValidationErrors } from "../../../../dto/response.dto.ts";
 import { SignInDto } from "../../../../dto/sign-in.dto.ts";
 
-import styles from "./sign-in-form.module.css";
+import styles from "../../styles/auth-form.module.css";
 
 export default function SignInFormComponent(): ReactElement {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ export default function SignInFormComponent(): ReactElement {
   };
 
   return (
-    <div className={styles["sign-in-form"]}>
+    <div className={styles["auth-form"]}>
       <h1>Sign In!</h1>
       <form onSubmit={formSubmitHandler}>
         <TextInputComponent

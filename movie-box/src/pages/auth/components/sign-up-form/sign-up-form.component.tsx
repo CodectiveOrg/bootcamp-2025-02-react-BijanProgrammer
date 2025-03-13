@@ -15,7 +15,7 @@ import PasswordInputComponent from "../../../../components/password-input/passwo
 import { ValidationErrors } from "../../../../dto/response.dto.ts";
 import { SignUpDto } from "../../../../dto/sign-up.dto.ts";
 
-import styles from "./sign-up-form.module.css";
+import styles from "../../styles/auth-form.module.css";
 
 export default function SignUpFormComponent(): ReactElement {
   const navigate = useNavigate();
@@ -51,7 +51,7 @@ export default function SignUpFormComponent(): ReactElement {
   };
 
   return (
-    <div className={styles["sign-up-form"]}>
+    <div className={styles["auth-form"]}>
       <h1>Sign Up!</h1>
       <form onSubmit={formSubmitHandler}>
         <TextInputComponent
