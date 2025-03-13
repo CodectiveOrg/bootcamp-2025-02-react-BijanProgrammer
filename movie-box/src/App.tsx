@@ -7,6 +7,7 @@ import RootLayout from "./layouts/root/root.layout.tsx";
 import HomePage from "./pages/home/home.page.tsx";
 import MoviePage from "./pages/movie/movie.page.tsx";
 import SignUpPage from "./pages/auth/sign-up/sign-up.page.tsx";
+import SignInPage from "./pages/auth/sign-in/sign-in.page.tsx";
 import DashboardPage from "./pages/dashboard/dashboard.page.tsx";
 import NotFoundPage from "./pages/not-found/not-found.page.tsx";
 
@@ -22,6 +23,7 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="movie/:id" element={<MoviePage />} />
           <Route path="auth/sign-up" element={<SignUpPage />} />
+          <Route path="auth/sign-in" element={<SignInPage />} />
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
