@@ -1,4 +1,4 @@
-import { ComponentProps, ReactElement, forwardRef, ForwardedRef } from "react";
+import { ComponentProps, ReactElement } from "react";
 
 import clsx from "clsx";
 
@@ -14,16 +14,20 @@ type Props = ComponentProps<"input"> & {
   errors?: string[];
 };
 
-function TextInputComponent(
-  { label, suffixIcon, onSuffixClick, errors, className, ...otherProps }: Props,
-  ref: ForwardedRef<HTMLInputElement>,
-): ReactElement {
+export default function TextInputComponent({
+  label,
+  suffixIcon,
+  onSuffixClick,
+  errors,
+  className,
+  ...otherProps
+}: Props): ReactElement {
   return (
     <div className={clsx(styles["text-input"], className)}>
       <label className={clsx(errors && errors.length > 0 && styles.invalid)}>
         <div className={styles.title}>{label}</div>
         <div className={styles.box}>
-          <input ref={ref} type="text" placeholder="" {...otherProps} />
+          <input type="text" placeholder="" {...otherProps} />
           {suffixIcon && (
             <IconButtonComponent onClick={onSuffixClick}>
               {suffixIcon}
@@ -35,5 +39,3 @@ function TextInputComponent(
     </div>
   );
 }
-
-export default forwardRef(TextInputComponent);
