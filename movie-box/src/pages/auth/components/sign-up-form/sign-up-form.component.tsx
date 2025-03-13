@@ -1,6 +1,6 @@
 import { FormEvent, ReactElement, useState } from "react";
 
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { useMutation } from "@tanstack/react-query";
 
@@ -18,6 +18,8 @@ import { SignUpDto } from "../../../../dto/sign-up.dto.ts";
 import styles from "./sign-up-form.module.css";
 
 export default function SignUpFormComponent(): ReactElement {
+  const navigate = useNavigate();
+
   const [validationErrors, setValidationErrors] =
     useState<ValidationErrors<SignUpDto>>();
 
@@ -42,6 +44,7 @@ export default function SignUpFormComponent(): ReactElement {
           toast.error(result.message);
         } else {
           toast.success(result.message);
+          navigate("/dashboard");
         }
       },
     });

@@ -1,7 +1,7 @@
 .toggle {
   color: var(--color-danger);
 
-  &:not(.visible) {
+  &:not(&.visible) {
     display: none;
   }
 }
@@ -14,8 +14,6 @@
 
   display: grid;
   gap: 0.5rem;
-
-  max-inline-size: 15rem;
 
   padding: 1rem;
 

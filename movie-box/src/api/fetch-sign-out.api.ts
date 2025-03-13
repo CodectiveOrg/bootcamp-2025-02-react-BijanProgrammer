@@ -1,18 +1,14 @@
 import { ResponseDto } from "../dto/response.dto.ts";
-import { SignUpDto } from "../dto/sign-up.dto.ts";
 
-export async function fetchSignUpApi(
-  dto: SignUpDto,
-): Promise<ResponseDto<null, SignUpDto>> {
+export async function fetchSignOutApi(): Promise<ResponseDto> {
   const response = await fetch(
-    `${import.meta.env.VITE_API_BASE_URL}/auth/sign-up`,
+    `${import.meta.env.VITE_API_BASE_URL}/auth/sign-out`,
     {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify(dto),
     },
   );
 

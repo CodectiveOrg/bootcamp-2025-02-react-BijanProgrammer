@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactElement, useState } from "react";
 
 import {
   flip,
@@ -23,8 +23,8 @@ type Props = {
 export default function ErrorsComponent({
   className,
   errors,
-}: Props): ReactNode {
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+}: Props): ReactElement {
+  const [isPopoverOpen, setIsPopoverOpen] = useState<boolean>(false);
 
   const { refs, floatingStyles, context } = useFloating({
     open: isPopoverOpen,

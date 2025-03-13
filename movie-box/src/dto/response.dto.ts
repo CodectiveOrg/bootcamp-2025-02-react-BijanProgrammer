@@ -13,5 +13,5 @@ type ErrorResponseDto<TFields = void> = {
 
 export type ResponseDto<TResult = void, TFields = void> = {
   statusCode: number;
-  message: string | string[];
+  message: string;
 } & (SuccessResponseDto<TResult> | ErrorResponseDto<TFields>);
