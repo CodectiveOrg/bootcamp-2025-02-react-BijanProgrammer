@@ -4,6 +4,7 @@ import Toaster from "./components/toaster/toaster.tsx";
 
 import RootLayout from "./layouts/root/root.layout.tsx";
 
+import GuestOnlyGuard from "./guards/guest-only.guard.tsx";
 import UserOnlyGuard from "./guards/user-only.guard.tsx";
 
 import HomePage from "./pages/home/home.page.tsx";
@@ -24,8 +25,10 @@ function App() {
         <Route element={<RootLayout />}>
           <Route index element={<HomePage />} />
           <Route path="movie/:id" element={<MoviePage />} />
-          <Route path="auth/sign-up" element={<SignUpPage />} />
-          <Route path="auth/sign-in" element={<SignInPage />} />
+          <Route element={<GuestOnlyGuard />}>
+            <Route path="auth/sign-up" element={<SignUpPage />} />
+            <Route path="auth/sign-in" element={<SignInPage />} />
+          </Route>
           <Route element={<UserOnlyGuard />}>
             <Route path="dashboard" element={<DashboardPage />} />
           </Route>
