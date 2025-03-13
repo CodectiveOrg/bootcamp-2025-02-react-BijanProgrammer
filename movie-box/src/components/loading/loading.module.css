@@ -10,6 +10,8 @@
   place-content: center;
 
   .particles {
+    --duration: 1s;
+
     position: relative;
 
     display: grid;
@@ -19,11 +21,10 @@
     height: 5em;
 
     .particle {
+      --delay: 0s;
+
       --particle-size: 1em;
       --base-rotation-radius: 2em;
-
-      --duration: 1s;
-      --delay: 0s;
 
       background-color: var(--color-primary);
 

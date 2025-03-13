@@ -15,6 +15,7 @@ const navItems: NavItem[] = [
   { title: "Home", href: "/" },
   { title: "About Us", href: "/about" },
   { title: "Contact Us", href: "/contact" },
+  { title: "Sign In", href: "/auth/sign-in" },
 ];
 
 function HeaderComponent(): ReactElement {
