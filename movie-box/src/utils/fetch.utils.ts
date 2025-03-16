@@ -16,7 +16,7 @@ export async function mbFetch<TResult = void, TFields = void>(
   return data;
 }
 
-async function fetchWithAutoRefreshToken<TResult = void, TFields = void>(
+export async function fetchWithAutoRefreshToken<TResult = void, TFields = void>(
   input: RequestInfo | URL,
   init?: RequestInit,
 ): Promise<[Response, ResponseDto<TResult, TFields>]> {
@@ -39,7 +39,7 @@ async function fetchWithAutoRefreshToken<TResult = void, TFields = void>(
   return [response, data];
 }
 
-async function tryToFetch<TResult = void, TFields = void>(
+export async function tryToFetch<TResult = void, TFields = void>(
   input: RequestInfo | URL,
   init?: RequestInit,
 ): Promise<[Response, ResponseDto<TResult, TFields>]> {
@@ -61,5 +61,7 @@ async function tryToFetch<TResult = void, TFields = void>(
     init,
   );
 
-  return [response, await response.json()];
+  const data = await response.json();
+
+  return [response, data];
 }

@@ -13,7 +13,7 @@ export default function GuestOnlyGuard(): ReactElement {
     queryKey: ["guestOnlyGuard"],
     queryFn: fetchAuthValidApi,
     staleTime: 0,
-    retry: false,
+    retry: 0,
   });
 
   if (isFetching) {

@@ -13,7 +13,7 @@ export default function UserOnlyGuard(): ReactElement {
     queryKey: ["userOnlyGuard"],
     queryFn: fetchAuthValidApi,
     staleTime: 0,
-    retry: false,
+    retry: 0,
   });
 
   if (isFetching) {

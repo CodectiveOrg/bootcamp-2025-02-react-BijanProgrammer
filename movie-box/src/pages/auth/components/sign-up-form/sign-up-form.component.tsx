@@ -29,7 +29,7 @@ export default function SignUpFormComponent(): ReactElement {
     mutationFn: fetchSignUpApi,
   });
 
-  const { control, handleSubmit, reset } = useForm<SignUpDto>({
+  const { control, handleSubmit } = useForm<SignUpDto>({
     defaultValues: {
       username: "",
       password: "",
@@ -44,7 +44,6 @@ export default function SignUpFormComponent(): ReactElement {
           toast.error(result.message);
         } else {
           toast.success(result.message);
-          reset();
           navigate("/dashboard");
         }
       },
