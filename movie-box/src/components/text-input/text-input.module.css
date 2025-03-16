@@ -1,7 +1,17 @@
 .text-input {
   display: grid;
-  grid-template-areas: "title server-errors" "box box";
+  grid-template-areas: "title server-errors" "box box" "client-error client-error";
   grid-template-columns: 1fr auto;
+
+  .client-error {
+    grid-area: client-error;
+
+    color: var(--color-danger);
+
+    margin-block-start: 0.25rem;
+
+    font-size: var(--fz-300);
+  }
 
   .server-errors {
     grid-area: server-errors;

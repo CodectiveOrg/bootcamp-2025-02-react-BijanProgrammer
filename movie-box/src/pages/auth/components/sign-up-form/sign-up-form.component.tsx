@@ -29,7 +29,11 @@ export default function SignUpFormComponent(): ReactElement {
     mutationFn: fetchSignUpApi,
   });
 
-  const { control, handleSubmit } = useForm<SignUpDto>({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors: clientErrors },
+  } = useForm<SignUpDto>({
     defaultValues: {
       username: "",
       password: "",
@@ -57,9 +61,22 @@ export default function SignUpFormComponent(): ReactElement {
         <Controller
           control={control}
           name="username"
+          rules={{
+            required: { value: true, message: "Username is required." },
+            minLength: {
+              value: 3,
+              message: "Username must be longer than or equal to 3 characters",
+            },
+            maxLength: {
+              value: 16,
+              message:
+                "Username must be shorter than or equal to 16 characters",
+            },
+          }}
           render={({ field }) => (
             <TextInputComponent
               label="Username"
+              clientError={clientErrors?.username}
               serverErrors={serverErrors?.username}
               {...field}
             />
@@ -68,10 +85,23 @@ export default function SignUpFormComponent(): ReactElement {
         <Controller
           control={control}
           name="password"
+          rules={{
+            required: { value: true, message: "Password is required." },
+            minLength: {
+              value: 4,
+              message: "Password must be longer than or equal to 4 characters",
+            },
+            maxLength: {
+              value: 32,
+              message:
+                "Password must be shorter than or equal to 32 characters",
+            },
+          }}
           render={({ field }) => (
             <PasswordInputComponent
               label="Password"
               autoComplete="new-password"
+              clientError={clientErrors?.password}
               serverErrors={serverErrors?.password}
               {...field}
             />
