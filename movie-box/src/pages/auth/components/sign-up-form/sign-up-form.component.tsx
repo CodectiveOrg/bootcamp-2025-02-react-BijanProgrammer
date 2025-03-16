@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router";
 import { useMutation } from "@tanstack/react-query";
 
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { toast } from "react-toastify";
 
@@ -15,7 +16,7 @@ import TextInputComponent from "../../../../components/text-input/text-input.com
 import PasswordInputComponent from "../../../../components/password-input/password-input.component.tsx";
 
 import { ValidationErrors } from "../../../../dto/response.dto.ts";
-import { SignUpDto } from "../../../../dto/sign-up.dto.ts";
+import { SignUpDto, signUpSchema } from "../../../../dto/sign-up.dto.ts";
 
 import styles from "../../styles/auth-form.module.css";
 
@@ -34,6 +35,7 @@ export default function SignUpFormComponent(): ReactElement {
     handleSubmit,
     formState: { errors: clientErrors },
   } = useForm<SignUpDto>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       username: "",
       password: "",
@@ -61,18 +63,6 @@ export default function SignUpFormComponent(): ReactElement {
         <Controller
           control={control}
           name="username"
-          rules={{
-            required: { value: true, message: "Username is required." },
-            minLength: {
-              value: 3,
-              message: "Username must be longer than or equal to 3 characters",
-            },
-            maxLength: {
-              value: 16,
-              message:
-                "Username must be shorter than or equal to 16 characters",
-            },
-          }}
           render={({ field }) => (
             <TextInputComponent
               label="Username"
@@ -85,18 +75,6 @@ export default function SignUpFormComponent(): ReactElement {
         <Controller
           control={control}
           name="password"
-          rules={{
-            required: { value: true, message: "Password is required." },
-            minLength: {
-              value: 4,
-              message: "Password must be longer than or equal to 4 characters",
-            },
-            maxLength: {
-              value: 32,
-              message:
-                "Password must be shorter than or equal to 32 characters",
-            },
-          }}
           render={({ field }) => (
             <PasswordInputComponent
               label="Password"
