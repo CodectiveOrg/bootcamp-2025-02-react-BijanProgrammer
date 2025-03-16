@@ -6,8 +6,6 @@ import { GenreType } from "../types/genre.type.ts";
 type FiltersStore = {
   filters: FiltersType;
   toggleGenre: (genre: GenreType) => void;
-  count: number;
-  increment: () => void;
 };
 
 export const useFiltersStore = create<FiltersStore>((set) => ({
@@ -29,6 +27,4 @@ export const useFiltersStore = create<FiltersStore>((set) => ({
       return { filters: { ...old.filters, genres: clone } };
     });
   },
-  count: 0,
-  increment: () => set((old) => ({ count: old.count + 1 })),
 }));
