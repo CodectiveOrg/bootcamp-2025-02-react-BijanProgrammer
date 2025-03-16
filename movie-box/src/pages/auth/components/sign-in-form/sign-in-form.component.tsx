@@ -22,7 +22,7 @@ import styles from "../../styles/auth-form.module.css";
 export default function SignInFormComponent(): ReactElement {
   const navigate = useNavigate();
 
-  const [validationErrors, setValidationErrors] =
+  const [serverErrors, setServerErrors] =
     useState<ValidationErrors<SignInDto>>();
 
   const mutation = useMutation({
@@ -40,7 +40,7 @@ export default function SignInFormComponent(): ReactElement {
     mutation.mutate(data, {
       onSuccess: (result) => {
         if ("error" in result) {
-          setValidationErrors(result.validationErrors);
+          setServerErrors(result.validationErrors);
           toast.error(result.message);
         } else {
           toast.success(result.message);
@@ -60,7 +60,7 @@ export default function SignInFormComponent(): ReactElement {
           render={({ field }) => (
             <TextInputComponent
               label="Username"
-              errors={validationErrors?.username}
+              serverErrors={serverErrors?.username}
               {...field}
             />
           )}
@@ -72,7 +72,7 @@ export default function SignInFormComponent(): ReactElement {
             <PasswordInputComponent
               label="Password"
               autoComplete="current-password"
-              errors={validationErrors?.password}
+              serverErrors={serverErrors?.password}
               {...field}
             />
           )}
