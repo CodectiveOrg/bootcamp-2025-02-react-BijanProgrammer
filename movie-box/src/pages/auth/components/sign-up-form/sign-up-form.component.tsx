@@ -1,8 +1,10 @@
-import { FormEvent, ReactElement, useState } from "react";
+import { ReactElement, useState } from "react";
 
 import { Link, useNavigate } from "react-router";
 
 import { useMutation } from "@tanstack/react-query";
+
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 import { toast } from "react-toastify";
 
@@ -27,17 +29,15 @@ export default function SignUpFormComponent(): ReactElement {
     mutationFn: fetchSignUpApi,
   });
 
-  const formSubmitHandler = (e: FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
+  const { control, handleSubmit } = useForm<SignUpDto>({
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
 
-    const formData = new FormData(e.currentTarget);
-
-    const dto: SignUpDto = {
-      username: formData.get("username") as string,
-      password: formData.get("password") as string,
-    };
-
-    mutation.mutate(dto, {
+  const formSubmitHandler: SubmitHandler<SignUpDto> = (data): void => {
+    mutation.mutate(data, {
       onSuccess: (result) => {
         if ("error" in result) {
           setValidationErrors(result.validationErrors);
@@ -53,17 +53,29 @@ export default function SignUpFormComponent(): ReactElement {
   return (
     <div className={styles["auth-form"]}>
       <h1>Sign Up!</h1>
-      <form onSubmit={formSubmitHandler}>
-        <TextInputComponent
-          label="Username"
+      <form onSubmit={handleSubmit(formSubmitHandler)}>
+        <Controller
+          control={control}
           name="username"
-          errors={validationErrors?.username}
+          render={({ field }) => (
+            <TextInputComponent
+              label="Username"
+              errors={validationErrors?.username}
+              {...field}
+            />
+          )}
         />
-        <PasswordInputComponent
-          label="Password"
+        <Controller
+          control={control}
           name="password"
-          autoComplete="new-password"
-          errors={validationErrors?.password}
+          render={({ field }) => (
+            <PasswordInputComponent
+              label="Password"
+              autoComplete="new-password"
+              errors={validationErrors?.password}
+              {...field}
+            />
+          )}
         />
         <ButtonComponent>Sign Up</ButtonComponent>
       </form>
