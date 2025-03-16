@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 
 import { useNavigate } from "react-router";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
@@ -15,8 +15,11 @@ import styles from "./dashboard.module.css";
 function DashboardPage(): ReactElement {
   const navigate = useNavigate();
 
+  const queryClient = useQueryClient();
+
   const mutation = useMutation({
     mutationFn: fetchSignOutApi,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] }),
   });
 
   const signOutButtonClickHandler = (): void => {
