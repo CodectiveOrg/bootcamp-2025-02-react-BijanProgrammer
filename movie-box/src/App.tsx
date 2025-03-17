@@ -14,6 +14,7 @@ import SignUpPage from "./pages/auth/sign-up/sign-up.page.tsx";
 import SignInPage from "./pages/auth/sign-in/sign-in.page.tsx";
 import ProfilePage from "./pages/dashboard/profile/profile.page.tsx";
 import SelectionPage from "./pages/dashboard/selection/selection.page.tsx";
+import CreatePage from "./pages/dashboard/selection/create/create.page.tsx";
 import NotFoundPage from "./pages/not-found/not-found.page.tsx";
 
 import QueryProvider from "./providers/query.provider.tsx";
@@ -35,6 +36,10 @@ function App() {
             <Route element={<DashboardLayout />}>
               <Route path="dashboard" element={<ProfilePage />} />
               <Route path="dashboard/selection" element={<SelectionPage />} />
+              <Route
+                path="dashboard/selection/create"
+                element={<CreatePage />}
+              />
             </Route>
           </Route>
           <Route path="*" element={<NotFoundPage />} />
