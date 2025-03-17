@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
-import { GenreType } from "../types/genre.type.ts";
 import { FiltersType } from "../types/filters.type.ts";
+import { GenreType } from "../types/genre.type.ts";
 
 type FiltersStore = {
   filters: FiltersType;
@@ -18,10 +18,7 @@ export const useFiltersStore = create<FiltersStore>((set) => ({
 
       if (index === -1) {
         return {
-          filters: {
-            ...old.filters,
-            genres: [...old.filters.genres, genre],
-          },
+          filters: { ...old.filters, genres: [...old.filters.genres, genre] },
         };
       }
 
