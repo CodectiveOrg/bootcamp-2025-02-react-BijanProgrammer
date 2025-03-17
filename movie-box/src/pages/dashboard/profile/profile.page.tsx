@@ -21,7 +21,7 @@ import {
 
 import styles from "./profile.module.css";
 
-export default function ProfileComponent(): ReactElement {
+export default function ProfilePage(): ReactElement {
   const user = useUser();
 
   const queryClient = useQueryClient();

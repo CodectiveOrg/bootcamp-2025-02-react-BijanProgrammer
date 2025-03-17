@@ -12,9 +12,8 @@ import HomePage from "./pages/home/home.page.tsx";
 import MoviePage from "./pages/movie/movie.page.tsx";
 import SignUpPage from "./pages/auth/sign-up/sign-up.page.tsx";
 import SignInPage from "./pages/auth/sign-in/sign-in.page.tsx";
+import ProfilePage from "./pages/dashboard/profile/profile.page.tsx";
 import NotFoundPage from "./pages/not-found/not-found.page.tsx";
-
-import ProfileComponent from "./pages/dashboard/profile/profile.component.tsx";
 
 import QueryProvider from "./providers/query.provider.tsx";
 
@@ -33,7 +32,7 @@ function App() {
           </Route>
           <Route element={<UserOnlyGuard />}>
             <Route element={<DashboardLayout />}>
-              <Route path="dashboard" element={<ProfileComponent />} />
+              <Route path="dashboard" element={<ProfilePage />} />
             </Route>
           </Route>
           <Route path="*" element={<NotFoundPage />} />
