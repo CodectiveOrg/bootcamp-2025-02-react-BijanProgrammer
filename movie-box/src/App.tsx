@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router";
 import Toaster from "./components/toaster/toaster.tsx";
 
 import RootLayout from "./layouts/root/root.layout.tsx";
+import DashboardLayout from "./layouts/dashboard/dashboard.layout.tsx";
 
 import GuestOnlyGuard from "./guards/guest-only.guard.tsx";
 import UserOnlyGuard from "./guards/user-only.guard.tsx";
@@ -11,8 +12,9 @@ import HomePage from "./pages/home/home.page.tsx";
 import MoviePage from "./pages/movie/movie.page.tsx";
 import SignUpPage from "./pages/auth/sign-up/sign-up.page.tsx";
 import SignInPage from "./pages/auth/sign-in/sign-in.page.tsx";
-import DashboardPage from "./pages/dashboard/dashboard.page.tsx";
 import NotFoundPage from "./pages/not-found/not-found.page.tsx";
+
+import ProfileComponent from "./pages/dashboard/profile/profile.component.tsx";
 
 import QueryProvider from "./providers/query.provider.tsx";
 
@@ -30,7 +32,9 @@ function App() {
             <Route path="auth/sign-in" element={<SignInPage />} />
           </Route>
           <Route element={<UserOnlyGuard />}>
-            <Route path="dashboard" element={<DashboardPage />} />
+            <Route element={<DashboardLayout />}>
+              <Route path="dashboard" element={<ProfileComponent />} />
+            </Route>
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Route>

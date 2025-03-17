@@ -1,0 +1,39 @@
+.sidebar {
+  background-color: var(--color-surface-300);
+  box-shadow: var(--shadow);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding: 1rem;
+
+  border-radius: var(--border-radius-400);
+
+  > ul {
+    margin-block-end: 4rem;
+
+    > li {
+      a {
+        display: block;
+
+        padding: 0.5rem;
+
+        border-radius: var(--border-radius-100);
+
+        &:hover {
+          background-color: var(--color-primary-fade);
+
+          color: var(--color-primary-hover);
+        }
+
+        &.active {
+          color: var(--color-primary);
+
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}

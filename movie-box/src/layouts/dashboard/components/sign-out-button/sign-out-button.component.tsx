@@ -6,13 +6,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "react-toastify";
 
-import { fetchSignOutApi } from "../../api/fetch-sign-out.api.ts";
+import { fetchSignOutApi } from "../../../../api/fetch-sign-out.api.ts";
 
-import ButtonComponent from "../../components/button/button.component.tsx";
+import ButtonComponent from "../../../../components/button/button.component.tsx";
 
-import styles from "./dashboard.module.css";
-
-function DashboardPage(): ReactElement {
+export default function SignOutButtonComponent(): ReactElement {
   const navigate = useNavigate();
 
   const queryClient = useQueryClient();
@@ -36,13 +34,12 @@ function DashboardPage(): ReactElement {
   };
 
   return (
-    <div className={styles.dashboard}>
-      <h1>Dashboard</h1>
-      <ButtonComponent color="danger" onClick={signOutButtonClickHandler}>
-        Sign Out
-      </ButtonComponent>
-    </div>
+    <ButtonComponent
+      color="danger"
+      variant="outlined"
+      onClick={signOutButtonClickHandler}
+    >
+      Sign Out
+    </ButtonComponent>
   );
 }
-
-export default DashboardPage;

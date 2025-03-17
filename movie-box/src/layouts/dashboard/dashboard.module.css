@@ -1,0 +1,15 @@
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 10rem 1fr;
+  align-items: start;
+  gap: 1rem;
+
+  .content {
+    background-color: var(--color-surface-300);
+    box-shadow: var(--shadow);
+
+    padding: 1rem;
+
+    border-radius: var(--border-radius-400);
+  }
+}
