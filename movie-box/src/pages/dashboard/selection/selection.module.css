@@ -1,0 +1,42 @@
+.selection {
+  display: grid;
+  gap: 2rem;
+
+  > ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    gap: 1rem;
+
+    > li {
+      .name {
+        font-size: var(--fz-500);
+        font-weight: 700;
+      }
+
+      .description {
+        font-size: var(--fz-300);
+      }
+
+      &.create {
+        a {
+          background-color: var(--color-surface-400);
+          color: var(--color-primary);
+
+          display: grid;
+          place-content: center;
+
+          padding: 1rem;
+
+          border: 2px dashed currentColor;
+          border-radius: var(--border-radius-400);
+
+          font-size: var(--fz-700);
+
+          &:hover {
+            background-color: var(--color-surface-300);
+          }
+        }
+      }
+    }
+  }
+}

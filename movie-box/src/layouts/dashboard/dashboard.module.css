@@ -5,14 +5,5 @@
   gap: 1rem;
 
   .content {
-    > * {
-      background-color: var(--color-surface-300);
-      box-shadow: var(--shadow);
-
-      margin-inline: auto;
-      padding: 1rem;
-
-      border-radius: var(--border-radius-400);
-    }
   }
 }
