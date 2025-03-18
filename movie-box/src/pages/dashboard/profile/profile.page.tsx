@@ -59,7 +59,7 @@ export default function ProfilePage(): ReactElement {
 
   return (
     <div className={styles.profile}>
-      <h1>Edit User Profile</h1>
+      <h1>Hello, {user?.username}!</h1>
       <form className="card" onSubmit={handleSubmit(formSubmitHandler)}>
         <Controller
           control={control}
