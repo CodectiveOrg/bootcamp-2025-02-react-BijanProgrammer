@@ -18,7 +18,7 @@ jobs:
       - uses: docker/setup-buildx-action@v2
 
       - name: Fill Out The .env File
-        run: echo "${{ secrets.ENV_FILE }}" > .env
+        run: echo "${{ secrets.ENV_FILE }}" > movie-box/.env
 
       - name: Build the project
         uses: docker/build-push-action@v4
