@@ -15,6 +15,7 @@ import SignInPage from "./pages/auth/sign-in/sign-in.page.tsx";
 import ProfilePage from "./pages/dashboard/profile/profile.page.tsx";
 import SelectionPage from "./pages/dashboard/selection/selection.page.tsx";
 import CreatePage from "./pages/dashboard/selection/create/create.page.tsx";
+import DetailPage from "./pages/dashboard/selection/detail/detail.page.tsx";
 import EditPage from "./pages/dashboard/selection/edit/edit.page.tsx";
 import NotFoundPage from "./pages/not-found/not-found.page.tsx";
 
@@ -41,8 +42,9 @@ function App() {
                 path="dashboard/selection/create"
                 element={<CreatePage />}
               />
+              <Route path="dashboard/selection/:id" element={<DetailPage />} />
               <Route
-                path="dashboard/selection/edit/:id"
+                path="dashboard/selection/:id/edit"
                 element={<EditPage />}
               />
             </Route>

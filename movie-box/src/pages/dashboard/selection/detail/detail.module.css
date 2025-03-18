@@ -1,0 +1,12 @@
+.detail {
+  display: grid;
+  gap: 1rem;
+
+  .movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+    gap: 1rem;
+
+    margin-block-start: 1rem;
+  }
+}

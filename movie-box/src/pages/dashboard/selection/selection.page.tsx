@@ -34,7 +34,7 @@ export default function SelectionPage(): ReactElement {
   });
 
   const editButtonClickHandler = (id: number): void => {
-    navigate(`/dashboard/selection/edit/${id}`);
+    navigate(`/dashboard/selection/${id}/edit`);
   };
 
   const removeButtonClickHandler = (id: number): void => {
@@ -63,7 +63,12 @@ export default function SelectionPage(): ReactElement {
       <ul>
         {data.map((selection) => (
           <li key={selection.id} className="card">
-            <div className={styles.name}>{selection.name}</div>
+            <Link
+              to={`/dashboard/selection/${selection.id}`}
+              className={styles.name}
+            >
+              {selection.name}
+            </Link>
             <div className={styles.description}>{selection.description}</div>
             <div className={styles.actions}>
               <ButtonComponent

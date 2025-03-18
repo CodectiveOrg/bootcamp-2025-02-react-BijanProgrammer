@@ -17,12 +17,15 @@
         .name {
           grid-area: name;
 
+          color: var(--color-primary);
+
           overflow: hidden;
 
           font-size: var(--fz-500);
           font-weight: 700;
 
           text-overflow: ellipsis;
+          text-decoration: underline;
           white-space: nowrap;
         }
 

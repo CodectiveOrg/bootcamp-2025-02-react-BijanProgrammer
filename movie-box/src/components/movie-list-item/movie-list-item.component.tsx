@@ -7,7 +7,6 @@ import clsx from "clsx";
 import ButtonComponent from "../button/button.component.tsx";
 
 import FluentEmojiStar from "../../icons/FluentEmojiStar.tsx";
-import MingcuteBookmarkLine from "../../icons/MingcuteBookmarkLine.tsx";
 
 import useConfigurationQuery from "../../queries/use-configuration.query.ts";
 import useGenresQuery from "../../queries/use-genres.query.ts";
@@ -18,12 +17,16 @@ import styles from "./movie-list-item.module.css";
 
 type Props = {
   movie: MovieListItemType;
-  onBookmarkClick: (movie: MovieListItemType) => void;
+  actionIcon: ReactElement;
+  actionColor?: "primary" | "danger";
+  onActionClick: (movie: MovieListItemType) => void;
 };
 
 function MovieListItemComponent({
   movie,
-  onBookmarkClick,
+  actionIcon,
+  actionColor = "primary",
+  onActionClick,
 }: Props): ReactElement {
   const { data: configuration } = useConfigurationQuery();
   const { data: allGenres } = useGenresQuery();
@@ -59,13 +62,13 @@ function MovieListItemComponent({
           {movie.title}
         </Link>
         <ButtonComponent
-          color="primary"
+          color={actionColor}
           variant="ghost"
           size="small"
-          className={styles.bookmark}
-          onClick={() => onBookmarkClick(movie)}
+          className={styles.action}
+          onClick={() => onActionClick(movie)}
         >
-          <MingcuteBookmarkLine />
+          {actionIcon}
         </ButtonComponent>
         <div className={styles.ratings}>
           {movie.vote_average.toLocaleString("default", {
