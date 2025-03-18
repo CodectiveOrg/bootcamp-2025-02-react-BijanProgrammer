@@ -12,9 +12,6 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: movie-box
     steps:
       - uses: actions/checkout@v3
 
@@ -41,6 +38,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_KEY }}
-          source: "dist/*"
+          source: "movie-box/dist/*"
           target: "/var/www/movie-box/html/"
           rm: true
