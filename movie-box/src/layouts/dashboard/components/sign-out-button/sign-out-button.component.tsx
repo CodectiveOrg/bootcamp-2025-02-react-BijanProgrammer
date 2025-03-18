@@ -8,7 +8,9 @@ import { toast } from "react-toastify";
 
 import { fetchSignOutApi } from "../../../../api/fetch-sign-out.api.ts";
 
-import ButtonComponent from "../../../../components/button/button.component.tsx";
+import MingcuteExitLine from "../../../../icons/MingcuteExitLine.tsx";
+
+import styles from "./sign-out-button.module.css";
 
 export default function SignOutButtonComponent(): ReactElement {
   const navigate = useNavigate();
@@ -34,12 +36,12 @@ export default function SignOutButtonComponent(): ReactElement {
   };
 
   return (
-    <ButtonComponent
-      color="danger"
-      variant="outlined"
+    <button
+      className={styles["sign-out-button"]}
       onClick={signOutButtonClickHandler}
     >
+      <MingcuteExitLine />
       Sign Out
-    </ButtonComponent>
+    </button>
   );
 }
