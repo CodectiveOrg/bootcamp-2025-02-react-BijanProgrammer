@@ -2,7 +2,7 @@ import { ReactElement, useState } from "react";
 
 import { Link, useNavigate } from "react-router";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
@@ -25,8 +25,11 @@ export default function SignInFormComponent(): ReactElement {
   const [serverErrors, setServerErrors] =
     useState<ValidationErrors<SignInDto>>();
 
+  const queryClient = useQueryClient();
+
   const mutation = useMutation({
     mutationFn: fetchSignInApi,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["user"] }),
   });
 
   const { control, handleSubmit } = useForm<SignInDto>({
