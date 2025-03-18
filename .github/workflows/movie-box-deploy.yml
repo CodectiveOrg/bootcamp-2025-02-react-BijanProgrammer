@@ -23,7 +23,8 @@ jobs:
       - name: Build the project
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./movie-box
+          file: ./movie-box/Dockerfile
           load: true
           tags: movie-box:latest
           push: false
