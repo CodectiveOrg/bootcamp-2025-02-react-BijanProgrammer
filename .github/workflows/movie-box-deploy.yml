@@ -1,8 +1,5 @@
 name: Movie Box Deploy
 on:
-  pull_request:
-    paths:
-      - "movie-box/**"
   push:
     branches: [ main ]
     paths:
