@@ -8,7 +8,7 @@ import { Controller, SubmitHandler, useForm } from "react-hook-form";
 
 import { toast } from "react-toastify";
 
-import { fetchSelectionFindAllApi } from "../../../../api/fetch-selection-create.api.ts";
+import { fetchSelectionCreateApi } from "../../../../api/fetch-selection-create.api.ts";
 
 import TextInputComponent from "../../../../components/text-input/text-input.component.tsx";
 import ButtonComponent from "../../../../components/button/button.component.tsx";
@@ -23,7 +23,7 @@ export default function CreatePage(): ReactElement {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: fetchSelectionFindAllApi,
+    mutationFn: fetchSelectionCreateApi,
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["selections"] }),
   });

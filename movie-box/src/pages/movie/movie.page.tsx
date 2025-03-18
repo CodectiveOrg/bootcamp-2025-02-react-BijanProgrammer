@@ -6,6 +6,8 @@ import { useParams } from "react-router";
 
 import { fetchMovieApi } from "../../api/fetch-movie.api.ts";
 
+import LoadingComponent from "../../components/loading/loading.component.tsx";
+
 import MovieDetailsComponent from "./components/movie-details/movie-details.component.tsx";
 
 import styles from "./movie.module.css";
@@ -20,7 +22,7 @@ function MoviePage(): ReactElement {
   });
 
   if (isFetching || !movie) {
-    return <>در حال بارگذاری...</>;
+    return <LoadingComponent />;
   }
 
   return (

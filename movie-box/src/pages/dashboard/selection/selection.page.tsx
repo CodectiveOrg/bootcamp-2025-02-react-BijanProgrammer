@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
@@ -12,11 +12,14 @@ import { fetchSelectionRemoveApi } from "../../../api/fetch-selection-remove.api
 import ButtonComponent from "../../../components/button/button.component.tsx";
 import LoadingComponent from "../../../components/loading/loading.component.tsx";
 
+import MingcuteEdit2Line from "../../../icons/MingcuteEdit2Line.tsx";
 import MingcuteDelete2Line from "../../../icons/MingcuteDelete2Line.tsx";
 
 import styles from "./selection.module.css";
 
 export default function SelectionPage(): ReactElement {
+  const navigate = useNavigate();
+
   const queryClient = useQueryClient();
 
   const { data, isPending, isError } = useQuery({
@@ -29,6 +32,10 @@ export default function SelectionPage(): ReactElement {
     onSuccess: () =>
       queryClient.invalidateQueries({ queryKey: ["selections"] }),
   });
+
+  const editButtonClickHandler = (id: number): void => {
+    navigate(`/dashboard/selection/edit/${id}`);
+  };
 
   const removeButtonClickHandler = (id: number): void => {
     mutation.mutate(id, {
@@ -58,15 +65,26 @@ export default function SelectionPage(): ReactElement {
           <li key={selection.id} className="card">
             <div className={styles.name}>{selection.name}</div>
             <div className={styles.description}>{selection.description}</div>
-            <ButtonComponent
-              color="danger"
-              variant="ghost"
-              size="small"
-              className={styles.remove}
-              onClick={() => removeButtonClickHandler(selection.id)}
-            >
-              <MingcuteDelete2Line />
-            </ButtonComponent>
+            <div className={styles.actions}>
+              <ButtonComponent
+                color="primary"
+                variant="ghost"
+                size="small"
+                className={styles.edit}
+                onClick={() => editButtonClickHandler(selection.id)}
+              >
+                <MingcuteEdit2Line />
+              </ButtonComponent>
+              <ButtonComponent
+                color="danger"
+                variant="ghost"
+                size="small"
+                className={styles.remove}
+                onClick={() => removeButtonClickHandler(selection.id)}
+              >
+                <MingcuteDelete2Line />
+              </ButtonComponent>
+            </div>
           </li>
         ))}
         <li className={styles.create}>

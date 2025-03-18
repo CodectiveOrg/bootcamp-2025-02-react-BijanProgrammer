@@ -15,6 +15,7 @@ import SignInPage from "./pages/auth/sign-in/sign-in.page.tsx";
 import ProfilePage from "./pages/dashboard/profile/profile.page.tsx";
 import SelectionPage from "./pages/dashboard/selection/selection.page.tsx";
 import CreatePage from "./pages/dashboard/selection/create/create.page.tsx";
+import EditPage from "./pages/dashboard/selection/edit/edit.page.tsx";
 import NotFoundPage from "./pages/not-found/not-found.page.tsx";
 
 import QueryProvider from "./providers/query.provider.tsx";
@@ -39,6 +40,10 @@ function App() {
               <Route
                 path="dashboard/selection/create"
                 element={<CreatePage />}
+              />
+              <Route
+                path="dashboard/selection/edit/:id"
+                element={<EditPage />}
               />
             </Route>
           </Route>

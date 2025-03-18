@@ -4,5 +4,5 @@ export type SelectionType = {
   id: number;
   name: string;
   description: string;
-  results: MovieListItemType[];
+  movies: MovieListItemType[];
 };
