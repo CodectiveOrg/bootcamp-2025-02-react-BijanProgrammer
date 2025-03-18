@@ -4,7 +4,10 @@ import { Link } from "react-router";
 
 import clsx from "clsx";
 
+import ButtonComponent from "../button/button.component.tsx";
+
 import FluentEmojiStar from "../../icons/FluentEmojiStar.tsx";
+import MingcuteBookmarkLine from "../../icons/MingcuteBookmarkLine.tsx";
 
 import useConfigurationQuery from "../../queries/use-configuration.query.ts";
 import useGenresQuery from "../../queries/use-genres.query.ts";
@@ -15,9 +18,13 @@ import styles from "./movie-list-item.module.css";
 
 type Props = {
   movie: MovieListItemType;
+  onBookmarkClick: (movie: MovieListItemType) => void;
 };
 
-function MovieListItemComponent({ movie }: Props): ReactElement {
+function MovieListItemComponent({
+  movie,
+  onBookmarkClick,
+}: Props): ReactElement {
   const { data: configuration } = useConfigurationQuery();
   const { data: allGenres } = useGenresQuery();
 
@@ -51,6 +58,15 @@ function MovieListItemComponent({ movie }: Props): ReactElement {
         >
           {movie.title}
         </Link>
+        <ButtonComponent
+          color="primary"
+          variant="ghost"
+          size="small"
+          className={styles.bookmark}
+          onClick={() => onBookmarkClick(movie)}
+        >
+          <MingcuteBookmarkLine />
+        </ButtonComponent>
         <div className={styles.ratings}>
           {movie.vote_average.toLocaleString("default", {
             minimumFractionDigits: 1,
