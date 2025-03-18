@@ -8,7 +8,9 @@ import { toast } from "react-toastify";
 
 import { fetchSelectionFindOneApi } from "../../../../api/fetch-selection-find-one.api.ts";
 import { fetchSelectionMovieRemoveApi } from "../../../../api/fetch-selection-movie-remove.api.ts";
+import { fetchSelectionClearApi } from "../../../../api/fetch-selection-clear.api.ts";
 
+import ButtonComponent from "../../../../components/button/button.component.tsx";
 import LoadingComponent from "../../../../components/loading/loading.component.tsx";
 import MovieListItemComponent from "../../../../components/movie-list-item/movie-list-item.component.tsx";
 
@@ -32,7 +34,15 @@ export default function DetailPage(): ReactElement {
     queryFn: () => fetchSelectionFindOneApi(id),
   });
 
-  const mutation = useMutation({
+  const clearMutation = useMutation({
+    mutationFn: fetchSelectionClearApi,
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ["selection", id],
+      }),
+  });
+
+  const addMovieMutation = useMutation({
     mutationFn: fetchSelectionMovieRemoveApi,
     onSuccess: () =>
       queryClient.invalidateQueries({
@@ -40,8 +50,20 @@ export default function DetailPage(): ReactElement {
       }),
   });
 
+  const clearButtonClickHandler = (): void => {
+    clearMutation.mutate(id!, {
+      onSuccess: (result) => {
+        if ("error" in result) {
+          toast.error(result.message);
+        } else {
+          toast.success(result.message);
+        }
+      },
+    });
+  };
+
   const actionClickHandler = (movie: MovieListItemType): void => {
-    mutation.mutate(
+    addMovieMutation.mutate(
       { id: id!, dto: { movieId: movie.id } },
       {
         onSuccess: (result) => {
@@ -67,6 +89,14 @@ export default function DetailPage(): ReactElement {
     <div className={styles.detail}>
       <h1>{selection?.name}</h1>
       <p className={styles.description}>{selection?.description}</p>
+      <ButtonComponent
+        color="danger"
+        variant="ghost"
+        className={styles.clear}
+        onClick={clearButtonClickHandler}
+      >
+        Remove All
+      </ButtonComponent>
       <ul className={styles.movies}>
         {selection?.movies.map((movie) => (
           <MovieListItemComponent
