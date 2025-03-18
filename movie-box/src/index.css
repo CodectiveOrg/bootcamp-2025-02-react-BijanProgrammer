@@ -81,3 +81,12 @@ body {
 p {
   color: var(--color-text-300);
 }
+
+.card {
+  background-color: var(--color-surface-300);
+  box-shadow: var(--shadow);
+
+  padding: 1rem;
+
+  border-radius: var(--border-radius-400);
+}

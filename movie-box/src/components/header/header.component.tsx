@@ -16,9 +16,13 @@ const navItems: NavItemType[] = [
   { title: "Contact Us", href: "/contact" },
 ];
 
-const guestOnlyNavItems = [{ title: "Sign In", href: "/auth/sign-in" }];
+const guestOnlyNavItems: NavItemType[] = [
+  { title: "Sign In", href: "/auth/sign-in" },
+];
 
-const userOnlyNavItems = [{ title: "Dashboard", href: "/dashboard" }];
+const userOnlyNavItems: NavItemType[] = [
+  { title: "Dashboard", href: "/dashboard" },
+];
 
 function HeaderComponent(): ReactElement {
   const user = useUser();

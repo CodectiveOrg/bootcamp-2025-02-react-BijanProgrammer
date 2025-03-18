@@ -14,7 +14,7 @@ type Props = {
 
 export default function NavItemComponent({ item }: Props): ReactElement {
   return (
-    <li key={item.title} className={styles["nav-item"]}>
+    <li className={styles["nav-item"]}>
       <NavLink
         to={item.href}
         className={({ isActive }) => clsx(isActive && styles.active)}

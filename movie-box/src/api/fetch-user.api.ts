@@ -11,7 +11,7 @@ export async function fetchUserApi(): Promise<UserType | null> {
 
   const { success, data: user } = userSchema.safeParse(data.result);
 
-  console.log(user);
+  console.log("user", user);
 
   return success ? user : null;
 }
