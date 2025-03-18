@@ -1,11 +1,16 @@
-name: Lint
+name: Movie Box Lint
 on:
   pull_request:
+    paths:
+      - "movie-box/**"
   workflow_dispatch:
 
 jobs:
   lint:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: movie-box
     steps:
       - uses: actions/checkout@v4.2.1
 
